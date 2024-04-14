@@ -7,8 +7,8 @@ namespace ZADANIE;
 public class BallManager
 {
     public ObservableCollection<Ball> balls { get; private set; }
-    private const int TableWidth = 1000; // Szerokość obszaru stołu
-    private const int TableHeight = 600; // Wysokość obszaru stołu
+    private const int TableWidth = 1000;
+    private const int TableHeight = 600;
 
     public BallManager()
     {
