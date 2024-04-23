@@ -76,9 +76,21 @@ namespace TP.ConcurrentProgramming.PresentationModel
     {
       if (state != null)
         throw new ArgumentOutOfRangeException(nameof(state));
-      Top = Top + (Random.NextDouble() - 0.5) * 5;
-      Left = Left + (Random.NextDouble() - 0.5) * 15;
-    }
+      double newTop = Top + (Random.NextDouble() - 0.5) * 5;
+      double newLeft = Left + (Random.NextDouble() - 0.5) * 15;
+
+            if (newTop < 5 || newTop > 395)
+                newTop = Top * -1 * (Random.NextDouble() - 0.5) * 5;
+
+            if (newLeft < 5 || newLeft > 795)
+                newLeft = Left * -1 * (Random.NextDouble() - 0.5) * 15;
+
+            if (newTop >= 0 && newTop <= 400 && newLeft >= 0 && newLeft <= 800)
+            {
+                Top = newTop;
+                Left = newLeft;
+            }
+        }
 
     #endregion private
   }
