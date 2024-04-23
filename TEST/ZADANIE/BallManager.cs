@@ -21,7 +21,9 @@ public class BallManager
         balls.Add(ball);
     }
 
-    // Metoda do aktualizacji położenia wszystkich kul
+    /// <summary>
+    /// Metoda do aktualizacji położenia wszystkich kul
+    /// </summary>
     public void UpdateBalls()
     {
         List<Ball> ballsToRemove = new List<Ball>();

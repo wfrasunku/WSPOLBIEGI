@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -37,7 +38,9 @@ namespace Pool.WpfApp.ViewModel
         private void GenerateBalls(int numberOfBalls)
         {
             // Tutaj generujesz odpowiednią liczbę kul na stole
-            Console.WriteLine($"Generowanie {numberOfBalls} kulek na stole...");
+#if DEBUG
+            Debug.WriteLine($"Generowanie {numberOfBalls} kulek na stole...");
+#endif
         }
 
         private void ExecuteStartPoolCommand(object parameter)

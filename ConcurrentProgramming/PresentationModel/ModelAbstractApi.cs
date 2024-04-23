@@ -1,0 +1,43 @@
+﻿using System;
+using System.ComponentModel;
+
+namespace TP.ConcurrentProgramming.PresentationModel
+{
+  public interface IBall : INotifyPropertyChanged
+  {
+    double Top { get; }
+    double Left { get; }
+    double Diameter { get; }
+  }
+
+  public class BallChaneEventArgs : EventArgs
+  {
+    public IBall Ball { get; internal set; }
+  }
+
+  public abstract class ModelAbstractApi : IObservable<IBall>, IDisposable
+  {
+    public static ModelAbstractApi CreateApi()
+    {
+      PresentationModel model = new PresentationModel();
+      return model;
+    }
+
+        public abstract void AddBall();
+        public abstract void Start();
+
+        public abstract void RemoveBall();
+
+    #region IObservable
+
+    public abstract IDisposable Subscribe(IObserver<IBall> observer);
+
+    #endregion IObservable
+
+    #region IDisposable
+
+    public abstract void Dispose();
+
+    #endregion IDisposable
+  }
+}
