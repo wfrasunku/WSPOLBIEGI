@@ -61,6 +61,7 @@ namespace TP.ConcurrentProgramming.PresentationModel
 
     #region private
 
+
     private double TopBackingField;
     private double LeftBackingField;
     private Timer MoveTimer;
@@ -75,8 +76,8 @@ namespace TP.ConcurrentProgramming.PresentationModel
     {
       if (state != null)
         throw new ArgumentOutOfRangeException(nameof(state));
-      Top = Top + (Random.NextDouble() - 0.5) * 10;
-      Left = Left + (Random.NextDouble() - 0.5) * 10;
+      Top = Top + (Random.NextDouble() - 0.5) * 5;
+      Left = Left + (Random.NextDouble() - 0.5) * 15;
     }
 
     #endregion private

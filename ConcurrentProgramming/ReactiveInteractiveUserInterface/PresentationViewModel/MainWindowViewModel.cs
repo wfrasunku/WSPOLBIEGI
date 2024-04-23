@@ -1,36 +1,38 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 using TP.ConcurrentProgramming.PresentationModel;
 using TP.ConcurrentProgramming.PresentationViewModel.MVVMLight;
 
 namespace TP.ConcurrentProgramming.PresentationViewModel
 {
   public class MainWindowViewModel : ViewModelBase, IDisposable
-
   {
-    #region public API
+        #region public API
 
-    public MainWindowViewModel()
-    {
-      ModelLayer = ModelAbstractApi.CreateApi();
-      IDisposable observer = ModelLayer.Subscribe<IBall>(x => Balls.Add(x));
-      ModelLayer.Start();
-    }
+        public MainWindowViewModel()
+        {
+            ModelLayer = ModelAbstractApi.CreateApi();
+            IDisposable observer = ModelLayer.Subscribe<IBall>(x => Balls.Add(x));
+            ModelLayer.Start();
+        }
 
-    public ObservableCollection<IBall> Balls { get; } = new ObservableCollection<IBall>();
+        public ObservableCollection<IBall> Balls { get; } = new ObservableCollection<IBall>();
 
-    #endregion public API
+        public RelayCommand AddBallCommand => new RelayCommand(execute => ModelLayer.AddBall());
 
-    #region IDisposable
+        #endregion public API
 
-    public void Dispose()
+        #region IDisposable
+
+        public void Dispose()
     {
       ModelLayer.Dispose();
     }
 
     #endregion IDisposable
 
-    #region private
+        #region private
 
     private ModelAbstractApi ModelLayer;
 

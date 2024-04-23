@@ -37,11 +37,19 @@ namespace TP.ConcurrentProgramming.PresentationModel
       }
     }
 
-    #endregion ModelAbstractApi
+        public override void AddBall()
+        {
+            Random random = new Random();
+            ModelBall newBall = new ModelBall(random.Next(100, 400 - 100), random.Next(100, 400 - 100)) { Diameter = 20 };
+            Balls2Dispose.Add(newBall);
+            BallChanged?.Invoke(this, new BallChaneEventArgs() { Ball = newBall });
+        }
 
-    #region API
+        #endregion ModelAbstractApi
 
-    public event EventHandler<BallChaneEventArgs> BallChanged;
+        #region API
+
+        public event EventHandler<BallChaneEventArgs> BallChanged;
 
     #endregion API
 

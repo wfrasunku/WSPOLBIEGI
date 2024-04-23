@@ -23,7 +23,8 @@ namespace TP.ConcurrentProgramming.PresentationModel
       return model;
     }
 
-    public abstract void Start();
+        public abstract void AddBall();
+        public abstract void Start();
 
     #region IObservable
 
