@@ -14,11 +14,17 @@ namespace TP.ConcurrentProgramming.PresentationViewModel
         public MainWindowViewModel()
         {
             ModelLayer = ModelAbstractApi.CreateApi();
-            IDisposable observer = ModelLayer.Subscribe<IBall>(x => Balls.Add(x));
-            ModelLayer.Start();
+            IDisposable observer = ModelLayer.Subscribe<IBall>(x =>{ if (Balls.Contains(x)) { Balls.Remove(x); return; } Balls.Add(x); });
+            
         }
 
         public ObservableCollection<IBall> Balls { get; } = new ObservableCollection<IBall>();
+
+        public RelayCommand StartCommand => new RelayCommand(
+            execute => {
+                String str = execute as String;
+                if (uint.TryParse(str, out uint value)) {ModelLayer.Start((int)value);}
+                });
 
         public RelayCommand AddBallCommand => new RelayCommand(execute => ModelLayer.AddBall());
         public RelayCommand RemoveBallCommand => new RelayCommand(execute => ModelLayer.RemoveBall(), canExecute => Balls != null);

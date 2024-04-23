@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics.Contracts;
 
 namespace TP.ConcurrentProgramming.PresentationModel
 {
@@ -24,9 +25,11 @@ namespace TP.ConcurrentProgramming.PresentationModel
     }
 
         public abstract void AddBall();
-        public abstract void Start();
+        public abstract void Start(int ballNumber);
 
         public abstract void RemoveBall();
+
+        
 
     #region IObservable
 
