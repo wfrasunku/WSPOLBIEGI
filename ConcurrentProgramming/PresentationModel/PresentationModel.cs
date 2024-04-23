@@ -30,10 +30,10 @@ namespace TP.ConcurrentProgramming.PresentationModel
     public override void Start()
     {
       Random random = new Random();
-      int ballNumber = random.Next(1, 10);
+      int ballNumber = random.Next(1, 20);
       for (int i = 0; i < ballNumber; i++)
       {
-        ModelBall newBall = new ModelBall(random.Next(100, 400 - 100), random.Next(100, 400 - 100)) { Diameter = 20 };
+        ModelBall newBall = new ModelBall(random.Next(100, 400 - 100), random.Next(100, 800 - 100)) { Diameter = 20 };
         Balls2Dispose.Add(newBall);
         BallChanged?.Invoke(this, new BallChaneEventArgs() { Ball = newBall });
       }
@@ -42,7 +42,7 @@ namespace TP.ConcurrentProgramming.PresentationModel
         public override void AddBall()
         {
             Random random = new Random();
-            ModelBall newBall = new ModelBall(random.Next(100, 400 - 100), random.Next(100, 400 - 100)) { Diameter = 20 };
+            ModelBall newBall = new ModelBall(random.Next(100, 400 - 100), random.Next(100, 800 - 100)) { Diameter = 20 };
             Balls2Dispose.Add(newBall);
             BallChanged?.Invoke(this, new BallChaneEventArgs() { Ball = newBall });
         }
