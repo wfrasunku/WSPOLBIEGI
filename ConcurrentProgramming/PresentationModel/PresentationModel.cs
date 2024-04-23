@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Reactive;
 using System.Reactive.Linq;
+using static System.Net.Mime.MediaTypeNames;
+using TP.ConcurrentProgramming.PresentationModel;
 
 namespace TP.ConcurrentProgramming.PresentationModel
 {
@@ -44,6 +46,18 @@ namespace TP.ConcurrentProgramming.PresentationModel
             Balls2Dispose.Add(newBall);
             BallChanged?.Invoke(this, new BallChaneEventArgs() { Ball = newBall });
         }
+
+        public override void RemoveBall()
+        {
+            if (Balls2Dispose.Count > 0)
+            {
+                var ballToRemove = Balls2Dispose[Balls2Dispose.Count - 1];
+                Balls2Dispose.Remove(ballToRemove);
+                ballToRemove.Dispose();
+            }
+        }
+
+        
 
         #endregion ModelAbstractApi
 

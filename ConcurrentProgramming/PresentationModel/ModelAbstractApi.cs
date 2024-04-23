@@ -26,6 +26,8 @@ namespace TP.ConcurrentProgramming.PresentationModel
         public abstract void AddBall();
         public abstract void Start();
 
+        public abstract void RemoveBall();
+
     #region IObservable
 
     public abstract IDisposable Subscribe(IObserver<IBall> observer);
