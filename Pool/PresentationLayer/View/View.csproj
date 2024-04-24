@@ -5,7 +5,7 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <StartupObject>TP.ConcurrentProgramming.PresentationView.App</StartupObject>
+    <StartupObject>TP.ConcurrentProgramming.View.App</StartupObject>
     <AssemblyName>TP.ConcurrentProgramming.$(MSBuildProjectName)</AssemblyName>
     <RootNamespace>TP.ConcurrentProgramming.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
     <VersionPrefix>4.2.0</VersionPrefix>
@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PresentationViewModel\PresentationViewModel.csproj" />
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
   </ItemGroup>
 
 </Project>

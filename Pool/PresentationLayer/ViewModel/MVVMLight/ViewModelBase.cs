@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace TP.ConcurrentProgramming.PresentationViewModel.MVVMLight
+namespace TP.ConcurrentProgramming.ViewModel.MVVMLight
 {
     public class ViewModelBase : INotifyPropertyChanged
     {

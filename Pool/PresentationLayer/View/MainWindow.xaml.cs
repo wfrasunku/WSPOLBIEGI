@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows;
-using TP.ConcurrentProgramming.PresentationViewModel;
+using TP.ConcurrentProgramming.ViewModel;
 
-namespace TP.ConcurrentProgramming.PresentationView
+namespace TP.ConcurrentProgramming.View
 {
     public partial class MainWindow : Window, IDisposable
     {

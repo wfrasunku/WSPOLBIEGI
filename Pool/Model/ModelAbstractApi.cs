@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics.Contracts;
 
-namespace TP.ConcurrentProgramming.PresentationModel
+namespace TP.ConcurrentProgramming.Model
 {
     public interface IBall : INotifyPropertyChanged
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace TP.ConcurrentProgramming.PresentationViewModel.MVVMLight
+namespace TP.ConcurrentProgramming.ViewModel.MVVMLight
 {
     public class RelayCommand : ICommand
     {

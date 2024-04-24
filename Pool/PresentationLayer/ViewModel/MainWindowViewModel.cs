@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using TP.ConcurrentProgramming.PresentationModel;
-using TP.ConcurrentProgramming.PresentationViewModel.MVVMLight;
+using TP.ConcurrentProgramming.Model;
+using TP.ConcurrentProgramming.ViewModel.MVVMLight;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace TP.ConcurrentProgramming.PresentationViewModel
+namespace TP.ConcurrentProgramming.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase, IDisposable
     {

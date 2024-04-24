@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reactive;
 using System.Reactive.Linq;
 
-namespace TP.ConcurrentProgramming.PresentationModel
+namespace TP.ConcurrentProgramming.Model
 {
     internal class PresentationModel : ModelAbstractApi
     {
