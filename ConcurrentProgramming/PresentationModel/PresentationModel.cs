@@ -4,11 +4,9 @@ using System.Reactive;
 using System.Reactive.Linq;
 
 namespace TP.ConcurrentProgramming.PresentationModel
-
 {
     internal class PresentationModel : ModelAbstractApi
     {
-
         private IObservable<EventPattern<BallChaneEventArgs>> eventObservable = null;
         private List<IDisposable> Balls2Dispose = new List<IDisposable>();
 

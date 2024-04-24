@@ -22,8 +22,8 @@ namespace TP.ConcurrentProgramming.PresentationModel
         public abstract void Start(int ballNumber);
         public abstract void RemoveBall();
         public abstract IDisposable Subscribe(IObserver<IBall> observer);
-
         public abstract void Dispose();
+
         public static ModelAbstractApi CreateApi()
         {
             PresentationModel model = new PresentationModel();
