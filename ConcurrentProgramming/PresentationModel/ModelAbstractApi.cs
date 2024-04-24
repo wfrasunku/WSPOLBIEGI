@@ -4,43 +4,30 @@ using System.Diagnostics.Contracts;
 
 namespace TP.ConcurrentProgramming.PresentationModel
 {
-  public interface IBall : INotifyPropertyChanged
-  {
-    double Top { get; }
-    double Left { get; }
-    double Diameter { get; }
-  }
-
-  public class BallChaneEventArgs : EventArgs
-  {
-    public IBall Ball { get; internal set; }
-  }
-
-  public abstract class ModelAbstractApi : IObservable<IBall>, IDisposable
-  {
-    public static ModelAbstractApi CreateApi()
+    public interface IBall : INotifyPropertyChanged
     {
-      PresentationModel model = new PresentationModel();
-      return model;
+        double Top { get; }
+        double Left { get; }
+        double Diameter { get; }
     }
 
+    public class BallChaneEventArgs : EventArgs
+    {
+        public IBall Ball { get; internal set; }
+    }
+
+    public abstract class ModelAbstractApi : IObservable<IBall>, IDisposable
+    {
         public abstract void AddBall();
         public abstract void Start(int ballNumber);
-
         public abstract void RemoveBall();
+        public abstract IDisposable Subscribe(IObserver<IBall> observer);
 
-        
-
-    #region IObservable
-
-    public abstract IDisposable Subscribe(IObserver<IBall> observer);
-
-    #endregion IObservable
-
-    #region IDisposable
-
-    public abstract void Dispose();
-
-    #endregion IDisposable
-  }
+        public abstract void Dispose();
+        public static ModelAbstractApi CreateApi()
+        {
+            PresentationModel model = new PresentationModel();
+            return model;
+        }
+    }
 }

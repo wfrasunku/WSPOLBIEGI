@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using System.Reactive;
 using System.Reactive.Linq;
-using static System.Net.Mime.MediaTypeNames;
-using TP.ConcurrentProgramming.PresentationModel;
 
 namespace TP.ConcurrentProgramming.PresentationModel
+
 {
     internal class PresentationModel : ModelAbstractApi
     {
+
+        private IObservable<EventPattern<BallChaneEventArgs>> eventObservable = null;
+        private List<IDisposable> Balls2Dispose = new List<IDisposable>();
+
+        public event EventHandler<BallChaneEventArgs> BallChanged;
+
         public PresentationModel()
         {
             eventObservable = Observable.FromEventPattern<BallChaneEventArgs>(this, "BallChanged");
         }
-
-        #region ModelAbstractApi
 
         public override void Dispose()
         {
@@ -61,22 +64,5 @@ namespace TP.ConcurrentProgramming.PresentationModel
                 BallChanged?.Invoke(this, new BallChaneEventArgs() { Ball = (IBall)ballToRemove });
             }
         }
-
-
-
-        #endregion ModelAbstractApi
-
-        #region API
-
-        public event EventHandler<BallChaneEventArgs> BallChanged;
-
-        #endregion API
-
-        #region private
-
-        private IObservable<EventPattern<BallChaneEventArgs>> eventObservable = null;
-        private List<IDisposable> Balls2Dispose = new List<IDisposable>();
-
-        #endregion private
     }
 }

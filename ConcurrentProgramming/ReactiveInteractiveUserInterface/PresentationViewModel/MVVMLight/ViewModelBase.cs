@@ -3,21 +3,13 @@ using System.Runtime.CompilerServices;
 
 namespace TP.ConcurrentProgramming.PresentationViewModel.MVVMLight
 {
-  public class ViewModelBase : INotifyPropertyChanged
-  {
-    #region INotifyPropertyChanged
-
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    #endregion INotifyPropertyChanged
-
-    #region API
-
-    protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+    public class ViewModelBase : INotifyPropertyChanged
     {
-      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
+        public event PropertyChangedEventHandler PropertyChanged;
 
-    #endregion API
-  }
+        protected virtual void RaisePropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
 }
