@@ -1,0 +1,39 @@
+﻿<Window x:Class="TP.ConcurrentProgramming.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:TP.ConcurrentProgramming.ViewModel;assembly=TP.ConcurrentProgramming.ViewModel"
+        mc:Ignorable="d"
+        Title="Pool" Height="600" Width="1000">
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Button Content="Start" Command="{Binding StartCommand}" CommandParameter="{Binding Text, ElementName=abc}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="600,30,0,0" Width="60" Height="20" />
+        <TextBox Name="abc" Margin="700,30,0,0" Width="60" Height="20"  HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <Button Content="+" Command="{Binding AddBallCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="280,30,0,0" Width="20" Height="20" />
+        <Button Content="-" Command="{Binding RemoveBallCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="80,30,0,0" Width="20" Height="20"/>
+        <TextBlock Text="{Binding Balls.Count, StringFormat={} Liczba kuli: {0}}" TextAlignment="Center" VerticalAlignment="Center" FontSize="22" HorizontalAlignment="Left" Margin="100,21,0,507" Width="180"/>
+        <Border BorderThickness="10" Height="400" Width="800" BorderBrush="Brown" >
+            <ItemsControl ItemsSource="{Binding Balls}" Width="780" Height="380">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas Name="CanvasName" Background="Green" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Ellipse Width= "{Binding Diameter}" Height="{Binding Diameter}" Fill="Magenta" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Top" Value="{Binding Top}" />
+                        <Setter Property="Canvas.Left" Value="{Binding Left}" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
+        </Border>
+    </Grid>
+</Window>
