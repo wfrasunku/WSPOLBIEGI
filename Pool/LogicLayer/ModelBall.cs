@@ -1,18 +1,17 @@
-﻿using System;
+﻿using DataLayer;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Threading;
 
-namespace TP.ConcurrentProgramming.Model
+namespace LogicLayer
 {
-    internal class ModelBall : IBall, IDisposable
+    public class ModelBall : IBall, IDisposable
     {
         private double TopBackingField;
         private double LeftBackingField;
         private Timer MoveTimer;
         private Random Random = new Random();
 
-        public double Diameter { get; internal set; }
+        public double Diameter { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

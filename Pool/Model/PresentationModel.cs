@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogicLayer;
+using System;
 using System.Collections.Generic;
 using System.Reactive;
 using System.Reactive.Linq;
@@ -23,7 +24,7 @@ namespace TP.ConcurrentProgramming.Model
                 item.Dispose();
         }
 
-        public override IDisposable Subscribe(IObserver<IBall> observer)
+        public override IDisposable Subscribe(IObserver<DataLayer.IBall> observer)
         {
             return eventObservable.Subscribe(x => observer.OnNext(x.EventArgs.Ball), ex => observer.OnError(ex), () => observer.OnCompleted());
         }
@@ -59,7 +60,7 @@ namespace TP.ConcurrentProgramming.Model
                 var ballToRemove = Balls2Dispose[Balls2Dispose.Count - 1];
                 Balls2Dispose.Remove(ballToRemove);
                 ballToRemove.Dispose();
-                BallChanged?.Invoke(this, new BallChaneEventArgs() { Ball = (IBall)ballToRemove });
+                BallChanged?.Invoke(this, new BallChaneEventArgs() { Ball = (DataLayer.IBall)ballToRemove });
             }
         }
     }

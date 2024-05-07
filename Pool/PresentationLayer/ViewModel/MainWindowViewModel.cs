@@ -1,9 +1,8 @@
-﻿using System;
+﻿using DataLayer;
+using System;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 using TP.ConcurrentProgramming.Model;
 using TP.ConcurrentProgramming.ViewModel.MVVMLight;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace TP.ConcurrentProgramming.ViewModel
 {

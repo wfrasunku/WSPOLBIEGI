@@ -1,16 +1,9 @@
-﻿using System;
+﻿using DataLayer;
+using System;
 using System.ComponentModel;
-using System.Diagnostics.Contracts;
 
 namespace TP.ConcurrentProgramming.Model
 {
-    public interface IBall : INotifyPropertyChanged
-    {
-        double Top { get; }
-        double Left { get; }
-        double Diameter { get; }
-    }
-
     public class BallChaneEventArgs : EventArgs
     {
         public IBall Ball { get; internal set; }
