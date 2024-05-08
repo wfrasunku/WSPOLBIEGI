@@ -56,7 +56,7 @@ namespace LogicLayer
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void Move(object state)
+        public void Move(object state)
         {
             if (state != null)
                 throw new ArgumentOutOfRangeException(nameof(state));

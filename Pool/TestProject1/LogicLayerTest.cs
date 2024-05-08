@@ -27,13 +27,26 @@ namespace TestProject1
         }
 
         [Test]
-        public void Move_Test()
+        public void Move_auto_Test()
         {
             var ball = new LogicLayer.ModelBall(100, 200);
             double initialTop = ball.Top;
             double initialLeft = ball.Left;
 
             Thread.Sleep(100); // Czekamy przez krótki czas, aby dać kuli czas na ruch
+
+            Assert.AreNotEqual(initialTop, ball.Top);
+            Assert.AreNotEqual(initialLeft, ball.Left);
+        }
+
+        [Test]
+        public void Move_manual_Test()
+        {
+            var ball = new LogicLayer.ModelBall(100, 200);
+            double initialTop = ball.Top;
+            double initialLeft = ball.Left;
+            ball.Dispose();
+            ball.Move(null);
 
             Assert.AreNotEqual(initialTop, ball.Top);
             Assert.AreNotEqual(initialLeft, ball.Left);
