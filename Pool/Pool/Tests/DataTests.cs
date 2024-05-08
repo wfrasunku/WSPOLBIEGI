@@ -2,7 +2,7 @@ using Data;
 
 namespace Tests
 {
-    public class BallTest
+    public class BallTests
     {
         BallData ball = new BallData(30, 40, 20);
         [SetUp]
