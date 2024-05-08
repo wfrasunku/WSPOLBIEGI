@@ -1,15 +1,18 @@
-﻿using Timer = System.Timers.Timer;
+﻿using System.Diagnostics;
+using Timer = System.Timers.Timer;
 
 namespace Data
 {
     public abstract class AbstractDataApi
     {
         public abstract void CreatePool(int numberOfBalls);
+        public abstract void AddBall();
+        public abstract void RemoveBall();
         public abstract List<BallData> GetBalls();
         private readonly List<BallData> balls = new();
         public static AbstractDataApi API() => new DataApi();
 
-        internal class DataApi : AbstractDataApi
+        public class DataApi : AbstractDataApi
         {
             private Timer MoveTimer;
             private bool updating;
@@ -21,7 +24,6 @@ namespace Data
                 updating = true;
                 List<BallData> balls = GetBalls();
                 MoveTimer = new Timer(100);
-
 
                 foreach (BallData ball in balls)
                 {
@@ -40,7 +42,24 @@ namespace Data
                     task.Start();
                 }
             }
-            public BallData CreateBall()
+
+            public override void AddBall()
+            {
+                BallData newBall = CreateBall();
+                balls.Add(newBall);
+                Debug.WriteLine(balls.Count);
+            }
+
+            public override void RemoveBall()
+            {
+                if (balls.Count > 0)
+                {
+                    balls.RemoveAt(balls.Count - 1);
+                }
+                Debug.WriteLine(balls.Count);
+            }
+
+            public static BallData CreateBall()
             {
                 Random r = new Random();
 

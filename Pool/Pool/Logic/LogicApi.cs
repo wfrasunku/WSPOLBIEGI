@@ -41,14 +41,8 @@ namespace Logic
                     ball.PropertyChanged += CheckCollision;
                 }
             }
-            public override void AddBall()
-            {
-                Debug.WriteLine("a");
-            }
-            public override void RemoveBall()
-            {
-                Debug.WriteLine("b");
-            }
+            public override void AddBall() => dataApi.AddBall();
+            public override void RemoveBall() => dataApi.RemoveBall();
 
             public void CheckCollision(object sender, PropertyChangedEventArgs e)
             {

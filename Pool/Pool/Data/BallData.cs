@@ -19,7 +19,7 @@ namespace Data
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void OnPropertyChanged(string name)
+        public virtual void OnPropertyChanged(string name)
         {
             if (PropertyChanged != null)
             {

@@ -9,8 +9,22 @@ namespace ViewModel
         private ObservableCollection<BallModel> balls = new();
         private AbstractModelApi api;
 
-        public RelayCommand AddBallCommand => new RelayCommand(execute => api.AddBall());
-        public RelayCommand RemoveBallCommand => new RelayCommand(execute => api.RemoveBall(), canExecute => Balls != null);
+        public RelayCommand AddBallCommand => new RelayCommand(
+            execute =>
+            {
+                api.AddBall();
+                this.Balls = api.GetBalls();
+                OnPropertyChanged(nameof(Balls));
+            });
+
+        public RelayCommand RemoveBallCommand => new RelayCommand(
+            execute =>
+            {
+                api.RemoveBall();
+                this.Balls = api.GetBalls();
+                OnPropertyChanged(nameof(Balls));
+            }, canExecute => Balls != null);
+
         public RelayCommand StartMoveCommand => new RelayCommand(
             execute =>
             {
@@ -23,10 +37,7 @@ namespace ViewModel
 
         public void OnPropertyChanged(string name)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         public GenerateBalls() => this.api = AbstractModelApi.API();
@@ -39,7 +50,7 @@ namespace ViewModel
                 if (balls != value)
                 {
                     balls = value;
-                    OnPropertyChanged(nameof(balls));
+                    OnPropertyChanged(nameof(Balls));
                 }
             }
         }
