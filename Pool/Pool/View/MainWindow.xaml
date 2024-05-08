@@ -3,10 +3,40 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:View"
+        xmlns:ViewModel="clr-namespace:ViewModel;assembly=ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="600" Width="1000">
 
+    <Grid Margin="0,10,10,0">
+        <Grid.DataContext>
+            <ViewModel:GenerateBalls/>
+        </Grid.DataContext>
+
+        <TextBox Name="NumberOfBalls" HorizontalAlignment="Left" Margin="700,30,0,0" VerticalAlignment="Top" Width="60" Height="20"/>
+        <Button Content="Start" HorizontalAlignment="Left" Margin="600,30,0,0" VerticalAlignment="Top" Width="60" Height="20" Command="{Binding StartMoveCommand}" CommandParameter="{Binding Text, ElementName=NumberOfBalls}"/>
+        <Button Content="+" Command="{Binding AddBallCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="250,30,0,0" Width="20" Background="#aaffaa" Height="20" />
+        <Button Content="-" Command="{Binding RemoveBallCommand}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,30,0,0" Width="20" Background="#ffaaaa" Height="20"/>
+        <TextBlock Text="{Binding Balls.Count, StringFormat={} Liczba kuli: {0}}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="100,35,0,507" Width="180"/>
+
+        <Border BorderThickness="10" Height="400" Width="800" BorderBrush="Brown" >
+            <ItemsControl  ItemsSource="{Binding Balls}" Width="780" Height="380" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas Background="Green"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                        <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Ellipse Height="{Binding Diameter}" Width="{Binding Diameter}" Stroke="Black" Fill="Magenta"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
     </Grid>
 </Window>

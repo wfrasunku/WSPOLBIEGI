@@ -6,7 +6,7 @@ namespace ViewModel
 {
     public class GenerateBalls : INotifyPropertyChanged
     {
-        private ObservableCollection<Ball> balls = new();
+        private ObservableCollection<BallModel> balls = new();
         private AbstractModelApi api;
 
         public RelayCommand AddBallCommand => new RelayCommand(execute => api.AddBall());
@@ -31,7 +31,7 @@ namespace ViewModel
 
         public GenerateBalls() => this.api = AbstractModelApi.API();
 
-        public ObservableCollection<Ball> Balls
+        public ObservableCollection<BallModel> Balls
         {
             get { return balls; }
             set
