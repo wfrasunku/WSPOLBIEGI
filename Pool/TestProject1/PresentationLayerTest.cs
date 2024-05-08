@@ -42,8 +42,6 @@ namespace TestProject1
             window.RemoveBallCommand.Execute(null);
             Assert.AreEqual(1, window.Balls.Count);
         }
-
     }
-
 }
 
