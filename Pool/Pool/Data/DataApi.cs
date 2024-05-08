@@ -9,7 +9,7 @@ namespace Data
         private readonly List<BallData> balls = new();
         public static AbstractDataApi API() => new DataApi();
 
-        internal class DataApi : AbstractDataApi
+        public class DataApi : AbstractDataApi
         {
             private Timer MoveTimer;
             private bool updating;

@@ -39,15 +39,43 @@ namespace Tests
             
         }
     }
-    public class DataApiTests
+   
+    public class ApiTest
     {
         [Test]
-        public void DataApiTest()
+        public void CreatePoolTest()
         {
-            AbstractDataApi api = AbstractDataApi.API();
-            api.CreatePool(12);
-            Assert.AreEqual(12, api.GetBalls().Count);
+            Data.AbstractDataApi api = new Data.AbstractDataApi.DataApi();
+            api.CreatePool(5);
 
+            List<BallData> balls = api.GetBalls();
+            Assert.AreEqual(5, balls.Count);
+
+            // Sprawdź czy prędkości początkowe są ustawione
+            foreach (var ball in balls)
+            {
+                Assert.AreNotEqual(0, ball.XSpeed);
+                Assert.AreNotEqual(0, ball.YSpeed);
+            }
+        }
+
+        [Test]
+        public void CreateBallTest()
+        {
+            Data.AbstractDataApi api = new Data.AbstractDataApi.DataApi();
+            api.CreatePool(5);
+            BallData ball = api.GetBalls().First();
+
+            Assert.IsNotNull(ball);
+            // Sprawdź czy współrzędne i prędkości są w odpowiednich zakresach
+            Assert.GreaterOrEqual(ball.X, 100);
+            Assert.LessOrEqual(ball.X, 700);
+
+            Assert.GreaterOrEqual(ball.Y, 100);
+            Assert.LessOrEqual(ball.Y, 300);
+
+            Assert.IsTrue(ball.XSpeed >= -1 && ball.XSpeed <= 1);
+            Assert.IsTrue(ball.YSpeed >= -1 && ball.YSpeed <= 1);
         }
     }
 }
