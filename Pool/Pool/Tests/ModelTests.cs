@@ -38,6 +38,7 @@ namespace Tests
             
             ObservableCollection<BallModel> balls = modelApi.GetBalls();
             Assert.AreEqual(30, modelApi.GetBalls().Count);
+            Assert.AreNotEqual(balls[0], balls[1]);
             Assert.NotNull(balls);
 
             //modelApi.RemoveBall();
