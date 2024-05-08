@@ -27,14 +27,16 @@ namespace Tests
             ball.Y = 60;
             ball.Diameter = 30;
 
+            Assert.AreNotEqual(30, ball.X);
+            Assert.AreNotEqual(40, ball.Y);
+            Assert.AreNotEqual(20, ball.XSpeed);
+
             Assert.AreEqual(2, ball.XSpeed);
             Assert.AreEqual(3, ball.YSpeed);
             Assert.AreEqual(50, ball.X);
-            //Assert.AreNotEqual(30, ball.X);
             Assert.AreEqual(60, ball.Y);
-            //Assert.AreNotEqual(40, ball.Y);
             Assert.AreEqual(30, ball.Diameter);
-            //Assert.AreNotEqual(20, ball.XSpeed);
+            
         }
     }
     public class DataApiTests
