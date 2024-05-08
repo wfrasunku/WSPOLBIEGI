@@ -20,6 +20,7 @@ namespace TestProject1
             double expectedLeft = 200;
 
             var ball = new LogicLayer.ModelBall(expectedTop, expectedLeft);
+            ball.Dispose();
 
             Assert.AreEqual(expectedTop, ball.Top);
             Assert.AreEqual(expectedLeft, ball.Left);
