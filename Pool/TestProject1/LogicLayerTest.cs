@@ -9,10 +9,8 @@ using LogicLayer;
 
 namespace TestProject1
 {
-
     public class LogicLayerTest
     {
-
         [Test]
         public void Constructor_Test()
         {
@@ -27,6 +25,18 @@ namespace TestProject1
         }
 
         [Test]
+        public void Dispose_Test()
+        {
+            var ball = new LogicLayer.ModelBall(100, 200);
+            double initialTop = ball.Top;
+            double initialLeft = ball.Left;
+            ball.Dispose();
+
+            Assert.AreEqual(initialTop, ball.Top);
+            Assert.AreEqual(initialLeft, ball.Left);
+        }
+
+            [Test]
         public void Move_auto_Test()
         {
             var ball = new LogicLayer.ModelBall(100, 200);
