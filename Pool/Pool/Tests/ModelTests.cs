@@ -32,17 +32,20 @@ namespace Tests
         [Test]
         public void ModelApiTest()
         {
-            //AbstractLogicApi logicApi = AbstractLogicApi.API();
             AbstractModelApi modelApi = AbstractModelApi.API();
             modelApi.Start(30);
             
             ObservableCollection<BallModel> balls = modelApi.GetBalls();
             Assert.AreEqual(30, modelApi.GetBalls().Count);
-            Assert.AreNotEqual(balls[0], balls[1]);
+            // Sprawdź, czy dodane kule nie są takie same
+            for (int i = 0; i < balls.Count; i++)
+            {
+                for (int j = i + 1; j < balls.Count; j++)
+                {
+                    Assert.AreNotEqual(balls[i], balls[j]);
+                }
+            }
             Assert.NotNull(balls);
-
-            //modelApi.RemoveBall();
-            //Assert.AreEqual(30, modelApi.GetBalls().Count);
         }
     }
 }

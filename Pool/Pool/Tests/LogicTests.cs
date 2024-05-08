@@ -3,7 +3,7 @@ using Data;
 
 namespace Tests
 {
-    public class LogicTests
+    public class LogicApiTests
     {
         [SetUp]
         public void Setup()
@@ -17,16 +17,6 @@ namespace Tests
             api.StartUpdating(30);
             Assert.AreEqual(30, api.GetBalls().Count);
         }
-        //[Test]
-        //public void AddBallTest()
-        //{
-        //    AbstractLogicApi api = AbstractLogicApi.API();
-        //    api.StartUpdating(30);
-        //    Assert.AreEqual(30, api.GetBalls().Count);
-        //    //api.AddBall();
-        //    //api.RemoveBall();
-        //    //Assert.AreEqual(30, api.GetBalls().Count);
-        //}
     }
     public class BallLogicTests
     {
@@ -49,6 +39,39 @@ namespace Tests
             Assert.AreEqual(60, logicBall.X);
             Assert.AreEqual(80, logicBall.Y);
         }
+        [Test]
+        public void PropertyChangedTest()
+        {
+            BallData ball = new BallData(30, 40, 20);
+            BallLogic logicBall = new BallLogic(ball);
+
+            bool xChanged = false;
+            bool yChanged = false;
+            bool diameterChanged = false;
+
+            logicBall.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == nameof(BallLogic.X))
+                    xChanged = true;
+                else if (e.PropertyName == nameof(BallLogic.Y))
+                    yChanged = true;
+                else if (e.PropertyName == nameof(BallLogic.Diameter))
+                    diameterChanged = true;
+            };
+
+            // Zmiana X
+            logicBall.X = 50;
+            Assert.IsTrue(xChanged);
+
+            // Zmiana Y
+            logicBall.Y = 60;
+            Assert.IsTrue(yChanged);
+
+            // Zmiana Diameter
+            ball.Diameter = 30;
+            Assert.IsTrue(diameterChanged);
+        }
+
     }
 }
 

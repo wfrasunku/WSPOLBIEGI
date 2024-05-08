@@ -40,7 +40,7 @@ namespace Tests
         }
     }
    
-    public class ApiTest
+    public class DataApiTest
     {
         [Test]
         public void CreatePoolTest()
