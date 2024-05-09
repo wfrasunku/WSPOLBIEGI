@@ -8,6 +8,7 @@ namespace Model
         private double x;
         private double y;
         private double diameter;
+        private string color;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void OnPropertyChanged(string name)
@@ -41,6 +42,19 @@ namespace Model
             }
         }
 
+        public string Color
+        {
+            get { return color; }
+            set
+            {
+                if (color != value)
+                {
+                    color = value;
+                    OnPropertyChanged(nameof(Color));
+                }
+            }
+        }
+
         public double Diameter
         {
             get { return diameter; }
@@ -59,6 +73,7 @@ namespace Model
             this.x = ball.X;
             this.y = ball.Y;
             this.diameter = ball.Diameter;
+            this.color = ball.Color;
             ball.PropertyChanged += Move;
         }
 

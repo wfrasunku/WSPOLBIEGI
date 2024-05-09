@@ -61,6 +61,8 @@ namespace Logic
             }
         }
 
+        public string Color => ball.Color;
+
         public double Diameter => ball.Diameter;
     }
 }

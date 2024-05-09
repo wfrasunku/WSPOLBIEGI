@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Drawing;
 using Timer = System.Timers.Timer;
 
 namespace Data
@@ -23,10 +24,10 @@ namespace Data
                 CreateBalls(numberOfBalls);
                 updating = true;
                 List<BallData> balls = GetBalls();
-                MoveTimer = new Timer(100);
-
+  
                 foreach (BallData ball in balls)
                 {
+                    MoveTimer = new Timer(100);
                     Task task = new Task(async () =>
                     {
                         while (updating)
@@ -71,7 +72,22 @@ namespace Data
                 double newXSpeed = (xSpeed == 0) ? -1 : 1;
                 double newYSpeed = (ySpeed == 0) ? 1 : -1;
 
-                BallData createdBall = new BallData(x, y, 15);
+                string color;
+                double n = r.Next(1, 4);
+                if (n == 1)
+                {
+                    color = "Magenta";
+                }
+                else if (n == 2)
+                {
+                    color = "Blue";
+                }
+                else
+                {
+                    color = "Black";
+                }
+
+                BallData createdBall = new BallData(x, y, 30, color);
 
                 createdBall.SetSpeed(newXSpeed, newYSpeed);
                 return createdBall;
