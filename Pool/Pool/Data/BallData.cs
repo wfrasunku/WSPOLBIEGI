@@ -108,12 +108,6 @@ namespace Data
             }
         }
 
-        public void SetColor(string color)
-        {
-            Random r = new Random();
-            
-        }
-
         public void SetSpeed(double x, double y)
         {
             XSpeed = x;
