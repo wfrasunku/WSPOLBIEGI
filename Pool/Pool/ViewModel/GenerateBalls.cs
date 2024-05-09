@@ -12,7 +12,7 @@ namespace ViewModel
         public RelayCommand AddBallCommand => new RelayCommand(
             execute =>
             {
-                api.AddBall();
+                this.api.AddBall();
                 this.Balls = api.GetBalls();
                 OnPropertyChanged(nameof(Balls));
             });
@@ -20,7 +20,7 @@ namespace ViewModel
         public RelayCommand RemoveBallCommand => new RelayCommand(
             execute =>
             {
-                api.RemoveBall();
+                this.api.RemoveBall();
                 this.Balls = api.GetBalls();
                 OnPropertyChanged(nameof(Balls));
             }, canExecute => Balls != null);

@@ -45,8 +45,7 @@ namespace Data
 
             public override void AddBall()
             {
-                BallData newBall = CreateBall();
-                balls.Add(newBall);
+                this.balls.Add(CreateBall());
                 Debug.WriteLine(balls.Count);
             }
 
@@ -77,6 +76,7 @@ namespace Data
                 createdBall.SetSpeed(newXSpeed, newYSpeed);
                 return createdBall;
             }
+
             public void CreateBalls(int numberOfBalls)
             {
                 this.balls.Clear();

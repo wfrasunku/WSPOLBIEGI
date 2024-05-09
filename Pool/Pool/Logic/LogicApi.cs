@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
 using Data;
+using static Data.AbstractDataApi;
 
 namespace Logic
 {
@@ -41,9 +42,20 @@ namespace Logic
                     ball.PropertyChanged += CheckCollision;
                 }
             }
-            public override void AddBall() => dataApi.AddBall();
-            public override void RemoveBall() => dataApi.RemoveBall();
-
+            public override void AddBall()
+            {
+                this.dataApi.AddBall();
+                List<BallData> existingBalls = dataApi.GetBalls();
+                dataApi.CreatePool(existingBalls.Count);
+                StartUpdating(existingBalls.Count);
+            }
+            public override void RemoveBall()
+            {
+                this.dataApi.RemoveBall();
+                List<BallData> existingBalls = dataApi.GetBalls();
+                dataApi.CreatePool(existingBalls.Count);
+                StartUpdating(existingBalls.Count);
+            }
             public void CheckCollision(object sender, PropertyChangedEventArgs e)
             {
                 BallData ball = (BallData)sender;
