@@ -37,7 +37,7 @@ namespace Data
                                 ball.X += ball.XSpeed;
                                 ball.Y += ball.YSpeed;
                             }
-                            await Task.Delay(5);
+                            await Task.Delay(10);
                         }
                     });
                     task.Start();
@@ -66,21 +66,48 @@ namespace Data
                 double x = r.Next(100, 800 - 100);
                 double y = r.Next(100, 400 - 100);
 
-                double xSpeed = r.Next(-1, 2);
-                double ySpeed = r.Next(-1, 2);
+                double xSpeed = 0;
+                double ySpeed = 0;
 
-                double newXSpeed = (xSpeed == 0) ? -1 : 1;
-                double newYSpeed = (ySpeed == 0) ? 1 : -1;
+                while(xSpeed == 0)
+                {
+                    xSpeed = r.Next(-5, 6);
+                }
+
+                while(ySpeed == 0)
+                {
+                    ySpeed = r.Next(-5, 6);
+                }
 
                 string color;
-                double n = r.Next(1, 4);
+                double n = r.Next(1, 9);
                 if (n == 1)
                 {
-                    color = "Magenta";
+                    color = "Yellow";
                 }
                 else if (n == 2)
                 {
                     color = "Blue";
+                }
+                else if(n == 3)
+                {
+                    color = "Red";
+                }
+                else if (n == 4)
+                {
+                    color = "Purple";
+                }
+                else if (n == 5)
+                {
+                    color = "Orange";
+                }
+                else if (n == 6)
+                {
+                    color = "Green";
+                }
+                else if (n == 7)
+                {
+                    color = "Brown";
                 }
                 else
                 {
@@ -89,7 +116,7 @@ namespace Data
 
                 BallData createdBall = new BallData(x, y, 30, color);
 
-                createdBall.SetSpeed(newXSpeed, newYSpeed);
+                createdBall.SetSpeed(xSpeed, ySpeed);
                 return createdBall;
             }
 

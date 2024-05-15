@@ -62,6 +62,7 @@ namespace Logic
                 if (e.PropertyName == nameof(ball.X) || e.PropertyName == nameof(ball.Y))
                 {
                     FieldCollision(ball);
+
                 }
             }
 
