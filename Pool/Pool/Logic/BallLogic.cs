@@ -16,7 +16,10 @@ namespace Logic
 
         public void OnPropertyChanged(string name)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(name));
+            }
         }
 
         private void Update(object sender, PropertyChangedEventArgs e)
@@ -60,10 +63,20 @@ namespace Logic
                 }
             }
         }
+        public double Mass
+        {
+            get { return ball.Mass; }
+        }
 
-        public string Color => ball.Color;
+        public string Color
+        {
+            get { return ball.Color; }
+        }
 
-        public double Diameter => ball.Diameter;
+        public double Diameter
+        {
+            get { return ball.Diameter; }
+        }
     }
 }
 

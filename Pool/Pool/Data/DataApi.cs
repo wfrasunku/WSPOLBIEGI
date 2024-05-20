@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Drawing;
 using System.Linq.Expressions;
-using Timer = System.Timers.Timer;
+using System.Threading.Tasks;
+
 
 namespace Data
 {
@@ -16,7 +17,7 @@ namespace Data
 
         public class DataApi : AbstractDataApi
         {
-            private Timer MoveTimer;
+            private MoveTimer moveTimer;
             private bool updating;
             private readonly object positionLock = new();
 
@@ -25,22 +26,19 @@ namespace Data
                 CreateBalls(numberOfBalls);
                 updating = true;
                 List<BallData> balls = GetBalls();
+                moveTimer = new MoveTimer(balls);
   
                 foreach (BallData ball in balls)
                 {
-                    MoveTimer = new Timer(100);
-                    MoveTimer.AutoReset = true;
-                    MoveTimer.Enabled = true;
                     Task task = new Task(async () =>
                     {
                         while (updating)
                         {
                             lock (positionLock)
                             {
-                                ball.X += ball.XSpeed;
-                                ball.Y += ball.YSpeed;
+                                ball.ActualPosition(ball.X + ball.XSpeed, ball.Y + ball.YSpeed);
                             }
-                            await Task.Delay(15);
+                            await Task.Delay(5);
                         }
                     });
                     task.Start();
@@ -118,7 +116,7 @@ namespace Data
                 }
 
 
-                BallData createdBall = new BallData(x, y, 20, color, 10);
+                BallData createdBall = new BallData(x, y, 20, color, 3);
 
                 createdBall.SetSpeed(xSpeed, ySpeed);
                 return createdBall;

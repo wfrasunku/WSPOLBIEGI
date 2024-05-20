@@ -44,14 +44,6 @@ namespace Data
         public double Diameter
         {
             get { return diameter; }
-            set
-            {
-                if (diameter != value)
-                {
-                    diameter = value;
-                    OnPropertyChanged(nameof(Diameter));
-                }
-            }
         }
 
         public double X
@@ -109,8 +101,19 @@ namespace Data
 
         public void SetSpeed(double x, double y)
         {
+            if (x > 20 || y > 20)
+            {
+                x = 2;
+                y = 2;
+            }
             XSpeed = x;
             YSpeed = y;
+        }
+
+        public void ActualPosition(double x, double y)
+        {
+            X = x;
+            Y = y;
         }
     }
 }
