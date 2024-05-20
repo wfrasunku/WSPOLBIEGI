@@ -96,10 +96,9 @@ namespace Logic
                 {
                     if (nextBall == ball) continue;
 
-                    double dx = (ball.X + ball.Diameter / 2) - (nextBall.X + nextBall.Diameter / 2);
-                    double dy = (ball.Y + ball.Diameter / 2) - (nextBall.Y + nextBall.Diameter / 2);
-                    double distance = Math.Sqrt(dx * dx + dy * dy);
-
+                    double dx = (ball.X + ball.Diameter / 2 + ball.XSpeed) - (nextBall.X + nextBall.Diameter / 2 + nextBall.XSpeed);
+                    double dy = (ball.Y + ball.Diameter / 2 + ball.YSpeed) - (nextBall.Y + nextBall.Diameter / 2 + nextBall.YSpeed);
+                    double distance = Math.Pow(dx * dx + dy * dy, 0.5);
                     if (distance <= (ball.Diameter / 2) + (nextBall.Diameter / 2))
                     {
                         double nx = dx / distance;

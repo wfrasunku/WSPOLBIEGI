@@ -38,7 +38,7 @@ namespace Data
                             {
                                 ball.ActualPosition(ball.X + ball.XSpeed, ball.Y + ball.YSpeed);
                             }
-                            await Task.Delay(5);
+                            await Task.Delay(15);
                         }
                     });
                     task.Start();

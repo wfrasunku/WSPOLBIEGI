@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Timer = System.Timers.Timer;
+﻿using Timer = System.Timers.Timer;
 
 namespace Data
 {
@@ -11,7 +6,6 @@ namespace Data
     {
         private Timer moveTimer;
         private List<BallData> balls;
-
 
         public MoveTimer(List<BallData> balls)
         {
@@ -24,10 +18,6 @@ namespace Data
             moveTimer = new Timer(100);
             moveTimer.AutoReset = true;
             moveTimer.Enabled = true;
-        }
-        public void Stop()
-        {
-            moveTimer.Stop();
         }
     }
 }
