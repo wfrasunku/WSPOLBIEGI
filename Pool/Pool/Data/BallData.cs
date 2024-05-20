@@ -8,17 +8,17 @@ namespace Data
         private string color;
         private double x;
         private double y;
-        private double diameter;
+        private int diameter;
         private double xSpeed;
         private double ySpeed;
 
-        public BallData(double x, double y, int diameter, string color, double mass)
+        public BallData(double x, double y, int diameter, double mass, string color)
         {
             this.mass = mass;
-            this.color = color;
             this.x = x;
             this.y = y;
             this.diameter = diameter;    
+            this.color = color;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -41,7 +41,7 @@ namespace Data
             get { return color; }
         }
 
-        public double Diameter
+        public int Diameter
         {
             get { return diameter; }
         }

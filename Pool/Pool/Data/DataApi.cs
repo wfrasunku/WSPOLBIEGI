@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Drawing;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 
@@ -60,7 +61,7 @@ namespace Data
                 Debug.WriteLine(balls.Count);
             }
 
-            public static BallData CreateBall()
+            public static BallData CreateBall(string color = null)
             {
                 Random r = new Random();
 
@@ -80,46 +81,35 @@ namespace Data
                     ySpeed = r.Next(-5, 6);
                 }
 
-                string color;
-                double n = r.Next(1, 9);
-                if (n == 1)
-                {
-                    color = "Yellow";
-                }
-                else if (n == 2)
-                {
-                    color = "Blue";
-                }
-                else if(n == 3)
-                {
-                    color = "Red";
-                }
-                else if (n == 4)
-                {
-                    color = "Purple";
-                }
-                else if (n == 5)
-                {
-                    color = "Orange";
-                }
-                else if (n == 6)
-                {
-                    color = "Green";
-                }
-                else if (n == 7)
-                {
-                    color = "Brown";
-                }
-                else
-                {
-                    color = "Black";
-                }
+                //int diameter = r.Next(15, 25);
+                color = SetColor(color);
 
-
-                BallData createdBall = new BallData(x, y, 20, color, 3);
-
+                BallData createdBall = new BallData(x, y, 20, 3, color);
                 createdBall.SetSpeed(xSpeed, ySpeed);
                 return createdBall;
+            }
+
+            public static string SetColor(string color = null)
+            {
+                if (!string.IsNullOrEmpty(color))
+                {
+                    return color;
+                }
+
+                Random r = new Random();
+                double n = r.Next(1, 9);
+
+                return n switch
+                {
+                    1 => "Yellow",
+                    2 => "Blue",
+                    3 => "Red",
+                    4 => "Purple",
+                    5 => "Orange",
+                    6 => "Green",
+                    7 => "Brown",
+                    _ => "Black",
+                };
             }
 
             public void CreateBalls(int numberOfBalls)
