@@ -16,6 +16,7 @@ namespace Logic
 
         internal class LogicApi : AbstractLogicApi
         {
+            private readonly object speedLock = new object();
             private List<BallLogic> balls = new();
             private AbstractDataApi dataApi;
 
@@ -62,7 +63,7 @@ namespace Logic
                 if (e.PropertyName == nameof(ball.X) || e.PropertyName == nameof(ball.Y))
                 {
                     FieldCollision(ball);
-
+                    BallCollision(ball);
                 }
             }
 
@@ -87,6 +88,35 @@ namespace Logic
                 {
                     ball.SetSpeed(ball.XSpeed, -Math.Abs(ball.YSpeed));
                     ball.Y = 380 - ball.Diameter - 1;
+                }
+            }
+
+            private void BallCollision(BallData ball)
+            {
+                foreach (BallData nextBall in dataApi.GetBalls())
+                {
+                    if (nextBall == ball) continue;
+
+                    double dx = (ball.X + ball.Diameter / 2) - (nextBall.X + nextBall.Diameter / 2);
+                    double dy = (ball.Y + ball.Diameter / 2) - (nextBall.Y + nextBall.Diameter / 2);
+                    double distance = Math.Sqrt(dx * dx + dy * dy);
+
+                    if (distance <= (ball.Diameter / 2) + (nextBall.Diameter / 2))
+                    {
+                        double nx = dx / distance;
+                        double ny = dy / distance;
+
+                        double vx = ball.XSpeed - nextBall.XSpeed;
+                        double vy = ball.YSpeed - nextBall.YSpeed;
+
+                        double p = 2 * (vx * nx + vy * ny) / (ball.Mass + nextBall.Mass);
+
+                        lock (speedLock)
+                        {
+                            ball.SetSpeed(ball.XSpeed - p * nextBall.Mass * nx, ball.YSpeed - p * nextBall.Mass * ny);
+                            nextBall.SetSpeed(nextBall.XSpeed + p * ball.Mass * nx, nextBall.YSpeed + p * ball.Mass * ny);
+                        }
+                    }
                 }
             }
         }

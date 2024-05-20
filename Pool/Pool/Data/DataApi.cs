@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Drawing;
+using System.Linq.Expressions;
 using Timer = System.Timers.Timer;
 
 namespace Data
@@ -28,6 +29,8 @@ namespace Data
                 foreach (BallData ball in balls)
                 {
                     MoveTimer = new Timer(100);
+                    MoveTimer.AutoReset = true;
+                    MoveTimer.Enabled = true;
                     Task task = new Task(async () =>
                     {
                         while (updating)
@@ -37,7 +40,7 @@ namespace Data
                                 ball.X += ball.XSpeed;
                                 ball.Y += ball.YSpeed;
                             }
-                            await Task.Delay(10);
+                            await Task.Delay(15);
                         }
                     });
                     task.Start();
@@ -114,7 +117,8 @@ namespace Data
                     color = "Black";
                 }
 
-                BallData createdBall = new BallData(x, y, 30, color);
+
+                BallData createdBall = new BallData(x, y, 20, color, 10);
 
                 createdBall.SetSpeed(xSpeed, ySpeed);
                 return createdBall;

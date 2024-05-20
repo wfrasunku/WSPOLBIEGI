@@ -4,6 +4,7 @@ namespace Data
 {
     public class BallData : INotifyPropertyChanged
     {
+        private double mass;
         private string color;
         private double x;
         private double y;
@@ -11,12 +12,13 @@ namespace Data
         private double xSpeed;
         private double ySpeed;
 
-        public BallData(double x, double y, int diameter, string color)
+        public BallData(double x, double y, int diameter, string color, double mass)
         {
+            this.mass = mass;
             this.color = color;
             this.x = x;
             this.y = y;
-            this.diameter = diameter;
+            this.diameter = diameter;    
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -29,17 +31,14 @@ namespace Data
             }
         }
 
+        public double Mass 
+        {
+            get { return mass; }
+        }
+
         public string Color
         {
             get { return color; }
-            set
-            {
-                if (color != value)
-                {
-                    color = value;
-                    OnPropertyChanged(nameof(Color));
-                }
-            }
         }
 
         public double Diameter
