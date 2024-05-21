@@ -14,7 +14,7 @@ namespace Tests
         [Test]
         public void ModelBallTest()
         {
-            Data.BallData ball = new Data.BallData(100, 200, 30);
+            Data.BallData ball = new Data.BallData(100, 200, 30, 20, "blue");
             Logic.BallLogic ballLogic = new Logic.BallLogic(ball);
             Model.BallModel ballModel = new Model.BallModel(ballLogic);
 

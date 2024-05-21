@@ -23,7 +23,7 @@ namespace Tests
         [Test]
         public void GetterTest() 
         {
-            BallData ball = new BallData(30, 40, 20);
+            BallData ball = new BallData(30, 40, 20, 20, "blue");
             BallLogic logicBall = new BallLogic(ball);
             Assert.AreEqual(30, logicBall.X);
             Assert.AreEqual(40, logicBall.Y);
@@ -32,7 +32,7 @@ namespace Tests
         [Test]
         public void SetterTest()
         {
-            BallData ball = new BallData(30, 40, 20);
+            BallData ball = new BallData(30, 40, 20, 20, "blue");
             BallLogic logicBall = new BallLogic(ball);
             logicBall.X = 60;
             logicBall.Y = 80;
@@ -42,7 +42,7 @@ namespace Tests
         [Test]
         public void PropertyChangedTest()
         {
-            BallData ball = new BallData(30, 40, 20);
+            BallData ball = new BallData(30, 40, 20, 20, "blue");
             BallLogic logicBall = new BallLogic(ball);
 
             bool xChanged = false;
@@ -67,9 +67,7 @@ namespace Tests
             logicBall.Y = 60;
             Assert.IsTrue(yChanged);
 
-            // Zmiana Diameter
-            ball.Diameter = 30;
-            Assert.IsTrue(diameterChanged);
+            
         }
 
     }

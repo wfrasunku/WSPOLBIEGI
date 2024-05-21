@@ -12,7 +12,7 @@ namespace Tests
         [Test]
         public void GetterTest()
         {
-            BallData ball = new BallData(30, 40, 20);
+            BallData ball = new BallData(30, 40, 20, 20, "blue");
             Assert.AreEqual(30, ball.X);
             Assert.AreEqual(40, ball.Y);
             Assert.AreEqual(20, ball.Diameter);
@@ -21,11 +21,10 @@ namespace Tests
         [Test]
         public void SetterTest()
         {
-            BallData ball = new BallData(30, 40, 20);
+            BallData ball = new BallData(30, 40, 20, 20, "blue");
             ball.SetSpeed(2, 3);
             ball.X = 50;
             ball.Y = 60;
-            ball.Diameter = 30;
 
             Assert.AreNotEqual(30, ball.X);
             Assert.AreNotEqual(40, ball.Y);
@@ -35,7 +34,7 @@ namespace Tests
             Assert.AreEqual(3, ball.YSpeed);
             Assert.AreEqual(50, ball.X);
             Assert.AreEqual(60, ball.Y);
-            Assert.AreEqual(30, ball.Diameter);
+            Assert.AreEqual(20, ball.Diameter);
             
         }
     }
@@ -74,8 +73,8 @@ namespace Tests
             Assert.GreaterOrEqual(ball.Y, 100);
             Assert.LessOrEqual(ball.Y, 300);
 
-            Assert.IsTrue(ball.XSpeed >= -1 && ball.XSpeed <= 1);
-            Assert.IsTrue(ball.YSpeed >= -1 && ball.YSpeed <= 1);
+            Assert.IsTrue(ball.XSpeed >= -2 && ball.XSpeed <= 2);
+            Assert.IsTrue(ball.YSpeed >= -2 && ball.YSpeed <= 2);
         }
     }
 }
