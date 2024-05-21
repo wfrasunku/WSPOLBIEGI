@@ -10,28 +10,36 @@ namespace Data
 {
     public abstract class AbstractDataApi
     {
-        public abstract void CreatePool(int numberOfBalls);
+        public abstract void CreatePool(int numberOfBalls, int height, int width);
         public abstract void AddBall();
         public abstract void RemoveBall();
         public abstract List<BallData> GetBalls();
         private readonly List<BallData> balls = new();
         public static AbstractDataApi API() => new DataApi();
+        public abstract PoolTable PoolTable { get; }
 
         public class DataApi : AbstractDataApi
         {
+            private PoolTable table;
             private MoveTimer moveTimer;
             private bool updating;
             private readonly object positionLock = new();
 
-            public override void CreatePool(int numberOfBalls)
+            public override PoolTable PoolTable
             {
+                get { return table; }
+            }
+
+            public override void CreatePool(int numberOfBalls, int height, int width)
+            {
+                this.table = new PoolTable(height, width);
                 List<BallData> oldballs = GetBalls();
                 oldballs.Clear();
                 if (updating)
                 {
                     moveTimer.StopTimer();
                 }
-                CreateBalls(numberOfBalls);
+                CreateBalls(numberOfBalls, height, width);
                 updating = true;
                 List<BallData> balls = GetBalls();
                 moveTimer = new MoveTimer(balls);
@@ -55,25 +63,20 @@ namespace Data
 
             public override void AddBall()
             {
-                this.balls.Add(CreateBall());
                 Debug.WriteLine(balls.Count);
             }
 
             public override void RemoveBall()
             {
-                if (balls.Count > 0)
-                {
-                    balls.RemoveAt(balls.Count - 1);
-                }
                 Debug.WriteLine(balls.Count);
             }
 
-            public static BallData CreateBall(string color = null)
+            public static BallData CreateBall(int height, int width, string color = null)
             {
                 Random r = new Random();
 
-                double x = r.Next(100, 800 - 100);
-                double y = r.Next(100, 400 - 100);
+                double x = r.Next(100, width - 100);
+                double y = r.Next(100, height - 100);
 
                 double xSpeed = 0;
                 double ySpeed = 0;
@@ -119,12 +122,12 @@ namespace Data
                 };
             }
 
-            public void CreateBalls(int numberOfBalls)
+            public void CreateBalls(int numberOfBalls, int height, int width)
             {
                 this.balls.Clear();
                 for (int i = 0; i < numberOfBalls; i++)
                 {
-                    this.balls.Add(CreateBall());
+                    this.balls.Add(CreateBall(height, width));
                 }
             }
             public override List<BallData> GetBalls() => new List<BallData>(balls);

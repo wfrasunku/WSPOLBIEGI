@@ -17,6 +17,7 @@ namespace Logic
         {
             private readonly object speedLock = new object();
             private List<BallLogic> balls = new();
+            private PoolTable table;
             private AbstractDataApi dataApi;
 
             public LogicApi(AbstractDataApi abstractDataApi = null)
@@ -39,7 +40,7 @@ namespace Logic
                     ball.PropertyChanged -= CheckCollision;
                 }
                 this.balls.Clear();
-                this.dataApi.CreatePool(numberOfBalls);
+                this.dataApi.CreatePool(numberOfBalls, 380, 780);
                 foreach (BallData ball in this.dataApi.GetBalls())
                 {
                     this.balls.Add(new BallLogic(ball));
@@ -50,14 +51,14 @@ namespace Logic
             {
                 this.dataApi.AddBall();
                 List<BallData> existingBalls = dataApi.GetBalls();
-                dataApi.CreatePool(existingBalls.Count);
+                dataApi.CreatePool(existingBalls.Count, 380, 780);
                 StartUpdating(existingBalls.Count);
             }
             public override void RemoveBall()
             {
                 this.dataApi.RemoveBall();
                 List<BallData> existingBalls = dataApi.GetBalls();
-                dataApi.CreatePool(existingBalls.Count);
+                dataApi.CreatePool(existingBalls.Count, 380, 780);
                 StartUpdating(existingBalls.Count);
             }
             public void CheckCollision(object sender, PropertyChangedEventArgs e)
@@ -82,12 +83,12 @@ namespace Logic
                     ball.SetSpeed(ball.XSpeed, Math.Abs(ball.YSpeed));
                     ball.Y = 1;
                 }
-                if ((ball.X + ball.Diameter) >= 780)
+                if ((ball.X + ball.Diameter) >= this.dataApi.PoolTable.Width)
                 {
                     ball.SetSpeed(-Math.Abs(ball.XSpeed), ball.YSpeed);
                     ball.X = 780 - ball.Diameter - 1;
                 }
-                if ((ball.Y + ball.Diameter) >= 380)
+                if ((ball.Y + ball.Diameter) >= this.dataApi.PoolTable.Height)
                 {
                     ball.SetSpeed(ball.XSpeed, -Math.Abs(ball.YSpeed));
                     ball.Y = 380 - ball.Diameter - 1;
