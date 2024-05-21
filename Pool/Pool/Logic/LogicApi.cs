@@ -7,8 +7,6 @@ namespace Logic
     public abstract class AbstractLogicApi
     {
         public abstract List<BallLogic> GetBalls();
-        public abstract void AddBall();
-        public abstract void RemoveBall();
         public abstract void StartUpdating(int numberOfBalls);
 
         public static AbstractLogicApi API(AbstractDataApi abstractDataApi = null) => new LogicApi(abstractDataApi);
@@ -47,20 +45,7 @@ namespace Logic
                     ball.PropertyChanged += CheckCollision;
                 }
             }
-            public override void AddBall()
-            {
-                this.dataApi.AddBall();
-                List<BallData> existingBalls = dataApi.GetBalls();
-                dataApi.CreatePool(existingBalls.Count, 380, 780);
-                StartUpdating(existingBalls.Count);
-            }
-            public override void RemoveBall()
-            {
-                this.dataApi.RemoveBall();
-                List<BallData> existingBalls = dataApi.GetBalls();
-                dataApi.CreatePool(existingBalls.Count, 380, 780);
-                StartUpdating(existingBalls.Count);
-            }
+
             public void CheckCollision(object sender, PropertyChangedEventArgs e)
             {
                 BallData ball = (BallData)sender;

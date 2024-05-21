@@ -9,22 +9,6 @@ namespace ViewModel
         private ObservableCollection<BallModel> balls = new();
         private AbstractModelApi api;
 
-        public RelayCommand AddBallCommand => new RelayCommand(
-            execute =>
-            {
-                this.api.AddBall();
-                this.Balls = api.GetBalls();
-                OnPropertyChanged(nameof(Balls));
-            });
-
-        public RelayCommand RemoveBallCommand => new RelayCommand(
-            execute =>
-            {
-                this.api.RemoveBall();
-                this.Balls = api.GetBalls();
-                OnPropertyChanged(nameof(Balls));
-            }, canExecute => Balls != null);
-
         public RelayCommand StartMoveCommand => new RelayCommand(
             execute =>
             {

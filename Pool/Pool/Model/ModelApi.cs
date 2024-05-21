@@ -8,8 +8,6 @@ namespace Model
         public static AbstractModelApi API(AbstractLogicApi abstractLogicApi = null) => new ModelApi();
 
         public abstract void Start(int amountOfBalls);
-        public abstract void AddBall();
-        public abstract void RemoveBall();
         public abstract ObservableCollection<BallModel> GetBalls();
 
 
@@ -48,10 +46,6 @@ namespace Model
                 }
                 return Balls;
             }
-
-            public override void AddBall() => logicApi.AddBall();
-
-            public override void RemoveBall() => logicApi.RemoveBall();
         }
     }
 }

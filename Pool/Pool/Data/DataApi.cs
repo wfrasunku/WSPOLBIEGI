@@ -11,8 +11,6 @@ namespace Data
     public abstract class AbstractDataApi
     {
         public abstract void CreatePool(int numberOfBalls, int height, int width);
-        public abstract void AddBall();
-        public abstract void RemoveBall();
         public abstract List<BallData> GetBalls();
         private readonly List<BallData> balls = new();
         public static AbstractDataApi API() => new DataApi();
@@ -33,12 +31,12 @@ namespace Data
             public override void CreatePool(int numberOfBalls, int height, int width)
             {
                 this.table = new PoolTable(height, width);
-                List<BallData> oldballs = GetBalls();
-                oldballs.Clear();
+
                 if (updating)
                 {
                     moveTimer.StopTimer();
                 }
+
                 CreateBalls(numberOfBalls, height, width);
                 updating = true;
                 List<BallData> balls = GetBalls();
@@ -59,16 +57,6 @@ namespace Data
                     });
                     task.Start();
                 }
-            }
-
-            public override void AddBall()
-            {
-                Debug.WriteLine(balls.Count);
-            }
-
-            public override void RemoveBall()
-            {
-                Debug.WriteLine(balls.Count);
             }
 
             public static BallData CreateBall(int height, int width, string color = null)
