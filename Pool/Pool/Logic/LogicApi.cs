@@ -48,8 +48,10 @@ namespace Logic
                 }
             }
 
+
             private void FieldCollision(BallData ball)
             {
+                //Debug.WriteLine($"FieldCollision: X={ball.X}, Y={ball.Y}");
                 if (ball.X <= 0)
                 {
                     ball.SetSpeed(Math.Abs(ball.XSpeed), ball.YSpeed);
@@ -81,6 +83,9 @@ namespace Logic
                     double dx = (ball.X + ball.Diameter / 2 + ball.XSpeed) - (nextBall.X + nextBall.Diameter / 2 + nextBall.XSpeed);
                     double dy = (ball.Y + ball.Diameter / 2 + ball.YSpeed) - (nextBall.Y + nextBall.Diameter / 2 + nextBall.YSpeed);
                     double distance = Math.Pow(dx * dx + dy * dy, 0.5);
+
+                    //Debug.WriteLine($"BallCollision: dx={dx}, dy={dy}, distance={distance}");
+
                     if (distance <= (ball.Diameter / 2) + (nextBall.Diameter / 2))
                     {
                         double nx = dx / distance;

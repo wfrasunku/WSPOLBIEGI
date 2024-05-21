@@ -7,6 +7,7 @@ namespace Logic
     {
         private BallData ball;
         private PoolTable table;
+
         public BallLogic(BallData ball)
         {
             this.ball = ball;
@@ -87,6 +88,21 @@ namespace Logic
         public int Width
         {
             get { return table.Width; }
+
+        public double XSpeed
+        { 
+            get { return ball.XSpeed; } 
+        }
+
+        public double YSpeed
+        { 
+            get { return ball.YSpeed; } 
+        }
+
+        public void SetSpeed(double xSpeed, double ySpeed)
+        {
+            ball.SetSpeed(xSpeed, ySpeed);
+
         }
     }
 }
