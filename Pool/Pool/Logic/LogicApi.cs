@@ -34,6 +34,10 @@ namespace Logic
 
             public override void StartUpdating(int numberOfBalls)
             {
+                foreach (BallData ball in this.dataApi.GetBalls())
+                {
+                    ball.PropertyChanged -= CheckCollision;
+                }
                 this.balls.Clear();
                 this.dataApi.CreatePool(numberOfBalls);
                 foreach (BallData ball in this.dataApi.GetBalls())
