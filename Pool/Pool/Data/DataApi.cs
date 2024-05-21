@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Drawing;
 using System.Linq.Expressions;
+using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -24,6 +25,12 @@ namespace Data
 
             public override void CreatePool(int numberOfBalls)
             {
+                List<BallData> oldballs = GetBalls();
+                oldballs.Clear();
+                if (updating)
+                {
+                    moveTimer.StopTimer();
+                }
                 CreateBalls(numberOfBalls);
                 updating = true;
                 List<BallData> balls = GetBalls();

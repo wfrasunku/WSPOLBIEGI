@@ -19,5 +19,10 @@ namespace Data
             moveTimer.AutoReset = true;
             moveTimer.Enabled = true;
         }
+
+        public void StopTimer()
+        {
+            moveTimer.Stop();
+        }
     }
 }
