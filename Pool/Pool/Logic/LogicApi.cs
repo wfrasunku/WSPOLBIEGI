@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Diagnostics;
 using Data;
 
 namespace Logic
@@ -20,14 +19,7 @@ namespace Logic
 
             public LogicApi(AbstractDataApi abstractDataApi = null)
             {
-                if (abstractDataApi == null)
-                {
-                    this.dataApi = AbstractDataApi.API();
-                }
-                else
-                {
-                    this.dataApi = abstractDataApi;
-                }
+                this.dataApi = abstractDataApi ?? AbstractDataApi.API();
             }
             public override List<BallLogic> GetBalls() => this.balls;
 

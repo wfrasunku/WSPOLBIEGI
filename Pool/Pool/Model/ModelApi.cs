@@ -18,14 +18,7 @@ namespace Model
 
             public ModelApi(AbstractLogicApi abstractLogicApi = null)
             {
-                if (abstractLogicApi == null)
-                {
-                    this.logicApi = AbstractLogicApi.API();
-                }
-                else
-                {
-                    this.logicApi = abstractLogicApi;
-                }
+                this.logicApi = abstractLogicApi ?? AbstractLogicApi.API();
             }
 
             public ObservableCollection<BallModel> Balls

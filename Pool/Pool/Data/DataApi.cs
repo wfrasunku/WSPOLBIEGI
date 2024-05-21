@@ -1,12 +1,4 @@
-﻿using System.Diagnostics;
-using System.Drawing;
-using System.Linq.Expressions;
-using System.Reflection.Metadata.Ecma335;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-
-
-namespace Data
+﻿namespace Data
 {
     public abstract class AbstractDataApi
     {
