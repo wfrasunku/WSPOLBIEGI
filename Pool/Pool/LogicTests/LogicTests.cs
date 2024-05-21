@@ -32,29 +32,6 @@ namespace Tests
             Assert.AreEqual(5, api.GetBalls().Count);
         }
 
-        /*[Test]
-        public void BallCollisionTest()
-        {
-            api.StartUpdating(2);
-
-            var balls = api.GetBalls();
-            BallLogic ball1 = balls[0];
-            BallLogic ball2 = balls[1];
-
-            // Ustawienie piłek tak, aby doszło do kolizji
-            ball1.X = ball2.X = 100;
-            ball1.Y = ball2.Y = 100;
-
-            ball1.SetSpeed(1, 0);
-            ball2.SetSpeed(-1, 0);
-
-            // Czekanie na detekcję kolizji i reakcję
-            System.Threading.Thread.Sleep(100);
-
-            // Sprawdzenie, czy prędkości piłek zmieniły się po kolizji
-            Assert.AreNotEqual(1, ball1.XSpeed);
-            Assert.AreNotEqual(-1, ball2.XSpeed);
-        }*/
 
         [Test]
         public void FieldCollisionTest()
