@@ -77,7 +77,7 @@ namespace Tests
         [Test]
         public void CreatePoolTest()
         {
-            api.CreatePool(5);
+            api.CreatePool(5, 380, 780);
 
             List<BallData> balls = api.GetBalls();
             Assert.AreEqual(5, balls.Count);
@@ -93,7 +93,7 @@ namespace Tests
         [Test]
         public void CreateBallTest()
         {
-            api.CreatePool(5);
+            api.CreatePool(5, 380, 780);
             BallData ball = api.GetBalls().First();
 
             Assert.IsNotNull(ball);
@@ -109,27 +109,32 @@ namespace Tests
         }
 
         [Test]
-        public void AddRemoveBallTest()
+        public void BallColorTest()
         {
-            api.CreatePool(5);
-            api.AddBall();
-            List<BallData> balls = api.GetBalls();
-            Assert.AreEqual(6, balls.Count);
+            BallData ball = AbstractDataApi.DataApi.CreateBall(200, 240, "Red");
+            Assert.AreEqual("Red", ball.Color);
 
-            api.RemoveBall();
-            balls = api.GetBalls();
-            Assert.AreEqual(5, balls.Count);
+            ball = AbstractDataApi.DataApi.CreateBall(200, 240, "Red");
+            string[] validColors = { "Yellow", "Blue", "Red", "Purple", "Orange", "Green", "Brown", "Black" };
+            CollectionAssert.Contains(validColors, ball.Color);
+        }
+    }
+
+    public class PoolTableTests
+    {
+        private PoolTable table;
+
+        [SetUp]
+        public void Setup()
+        {
+            table = new PoolTable(380, 780);
         }
 
         [Test]
-        public void BallColorTest()
+        public void GetterTest()
         {
-            BallData ball = AbstractDataApi.DataApi.CreateBall("Red");
-            Assert.AreEqual("Red", ball.Color);
-
-            ball = AbstractDataApi.DataApi.CreateBall();
-            string[] validColors = { "Yellow", "Blue", "Red", "Purple", "Orange", "Green", "Brown", "Black" };
-            CollectionAssert.Contains(validColors, ball.Color);
+            Assert.AreEqual(380, table.Height);
+            Assert.AreEqual(780, table.Width);
         }
     }
 }

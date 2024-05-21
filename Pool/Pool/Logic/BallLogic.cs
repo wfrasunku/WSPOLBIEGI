@@ -88,6 +88,7 @@ namespace Logic
         public int Width
         {
             get { return table.Width; }
+        }
 
         public double XSpeed
         { 

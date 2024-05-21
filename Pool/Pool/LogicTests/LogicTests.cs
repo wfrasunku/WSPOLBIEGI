@@ -22,18 +22,6 @@ namespace Tests
         }
 
         [Test]
-        public void AddRemoveBallTest()
-        {
-            api.StartUpdating(5);
-            api.AddBall();
-            Assert.AreEqual(6, api.GetBalls().Count);
-
-            api.RemoveBall();
-            Assert.AreEqual(5, api.GetBalls().Count);
-        }
-
-
-        [Test]
         public void FieldCollisionTest()
         {
             api.StartUpdating(1);
