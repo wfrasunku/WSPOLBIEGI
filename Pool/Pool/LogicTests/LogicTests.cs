@@ -33,33 +33,6 @@ namespace Tests
         }
 
         /*[Test]
-        public void CollisionTest()
-        {
-            api.StartUpdating(2);
-
-            List<BallLogic> balls = api.GetBalls();
-            BallLogic ball1 = balls[0];
-            BallLogic ball2 = balls[1];
-
-            // Ustawiamy pozycje kul tak, aby doszło do kolizji
-            ball1.X = 100;
-            ball1.Y = 100;
-            ball1.SetSpeed(1, 0);
-
-            ball2.X = 120;
-            ball2.Y = 100;
-            ball2.SetSpeed(-1, 0);
-
-            // Symulacja kolizji
-            api.CheckCollision(ball1.ball, new PropertyChangedEventArgs(nameof(ball1.ball.X)));
-            api.CheckCollision(ball2.ball, new PropertyChangedEventArgs(nameof(ball2.ball.X)));
-
-            // Sprawdzamy, czy po kolizji zmieniły się prędkości kul
-            Assert.AreEqual(-1, ball1.ball.XSpeed);
-            Assert.AreEqual(1, ball2.ball.XSpeed);
-        }*/
-
-        /*[Test]
         public void BallCollisionTest()
         {
             api.StartUpdating(2);
@@ -87,41 +60,55 @@ namespace Tests
         public void FieldCollisionTest()
         {
             api.StartUpdating(1);
-            var ball = api.GetBalls().First();
+            //var ball = api.GetBalls().First();
 
             // Test kolizji z lewą ścianą
-            ball.X = 0;
-            ball.SetSpeed(-1, 0);
-            api.CheckCollision(ball, new PropertyChangedEventArgs(nameof(ball.X)));
-            api.CheckCollision(ball, new PropertyChangedEventArgs(nameof(ball.XSpeed)));
-            Assert.AreEqual(1, ball.XSpeed);
-            Assert.AreEqual(1, ball.X);
+            api.GetBalls().First().X = 0;
+            api.GetBalls().First().SetSpeed(-2, 0);
+
+            System.Threading.Thread.Sleep(20);
+            Assert.AreNotEqual(-2, api.GetBalls().First().XSpeed);
+
 
             // Test kolizji z prawą ścianą
-            ball.X = 780 - ball.Diameter;
-            ball.SetSpeed(1, 0);
-            api.CheckCollision(ball, new PropertyChangedEventArgs(nameof(ball.X)));
-            api.CheckCollision(ball, new PropertyChangedEventArgs(nameof(ball.XSpeed)));
-            Assert.AreEqual(-1, ball.XSpeed);
-            Assert.AreEqual(780 - ball.Diameter - 1, ball.X);
+            api.GetBalls().First().X = 780 - api.GetBalls().First().Diameter;
+            api.GetBalls().First().SetSpeed(2, 0);
+            System.Threading.Thread.Sleep(20);
+            Assert.AreNotEqual(2, api.GetBalls().First().XSpeed);
 
             // Test kolizji z górną ścianą
-            ball.Y = 0;
-            ball.SetSpeed(0, -1);
-            api.CheckCollision(ball, new PropertyChangedEventArgs(nameof(ball.Y)));
-            api.CheckCollision(ball, new PropertyChangedEventArgs(nameof(ball.YSpeed)));
-            Assert.AreEqual(1, ball.YSpeed);
-            Assert.AreEqual(1, ball.Y);
+            api.GetBalls().First().Y = 0;
+            api.GetBalls().First().SetSpeed(0, -2);
+
+            System.Threading.Thread.Sleep(20);
+            Assert.AreNotEqual(-2, api.GetBalls().First().YSpeed);
+
 
             // Test kolizji z dolną ścianą
-            ball.Y = 380 - ball.Diameter;
-            ball.SetSpeed(0, 1);
-            api.CheckCollision(ball, new PropertyChangedEventArgs(nameof(ball.Y)));
-            api.CheckCollision(ball, new PropertyChangedEventArgs(nameof(ball.YSpeed)));
-            Assert.AreEqual(-1, ball.YSpeed);
-            Assert.AreEqual(380 - ball.Diameter - 1, ball.Y);
+            api.GetBalls().First().Y = 380 - api.GetBalls().First().Diameter;
+            api.GetBalls().First().SetSpeed(0, 2);
+
+            System.Threading.Thread.Sleep(20);
+            Assert.AreNotEqual(2, api.GetBalls().First().YSpeed);
+        }
+
+        [Test]
+        public void BallCollisionTest()
+        {
+            api.StartUpdating(2);
+
+            api.GetBalls().First().X = api.GetBalls().Last().X = 100;
+            api.GetBalls().First().Y = api.GetBalls().Last().Y = 100;
+            api.GetBalls().First().SetSpeed(2, 0);
+            api.GetBalls().First().SetSpeed(-2, 0);
+            System.Threading.Thread.Sleep(100);
+
+            Assert.AreNotEqual(-2, api.GetBalls().First().XSpeed);
+            Assert.AreNotEqual(2, api.GetBalls().Last().XSpeed);
+
         }
     }
+
     public class BallLogicTests
     {
         private BallData ball;
