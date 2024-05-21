@@ -83,6 +83,44 @@ namespace Tests
             Assert.AreNotEqual(-1, ball2.XSpeed);
         }*/
 
+        [Test]
+        public void FieldCollisionTest()
+        {
+            api.StartUpdating(1);
+            var ball = api.GetBalls().First();
+
+            // Test kolizji z lewą ścianą
+            ball.X = 0;
+            ball.SetSpeed(-1, 0);
+            api.CheckCollision(ball, new PropertyChangedEventArgs(nameof(ball.X)));
+            api.CheckCollision(ball, new PropertyChangedEventArgs(nameof(ball.XSpeed)));
+            Assert.AreEqual(1, ball.XSpeed);
+            Assert.AreEqual(1, ball.X);
+
+            // Test kolizji z prawą ścianą
+            ball.X = 780 - ball.Diameter;
+            ball.SetSpeed(1, 0);
+            api.CheckCollision(ball, new PropertyChangedEventArgs(nameof(ball.X)));
+            api.CheckCollision(ball, new PropertyChangedEventArgs(nameof(ball.XSpeed)));
+            Assert.AreEqual(-1, ball.XSpeed);
+            Assert.AreEqual(780 - ball.Diameter - 1, ball.X);
+
+            // Test kolizji z górną ścianą
+            ball.Y = 0;
+            ball.SetSpeed(0, -1);
+            api.CheckCollision(ball, new PropertyChangedEventArgs(nameof(ball.Y)));
+            api.CheckCollision(ball, new PropertyChangedEventArgs(nameof(ball.YSpeed)));
+            Assert.AreEqual(1, ball.YSpeed);
+            Assert.AreEqual(1, ball.Y);
+
+            // Test kolizji z dolną ścianą
+            ball.Y = 380 - ball.Diameter;
+            ball.SetSpeed(0, 1);
+            api.CheckCollision(ball, new PropertyChangedEventArgs(nameof(ball.Y)));
+            api.CheckCollision(ball, new PropertyChangedEventArgs(nameof(ball.YSpeed)));
+            Assert.AreEqual(-1, ball.YSpeed);
+            Assert.AreEqual(380 - ball.Diameter - 1, ball.Y);
+        }
     }
     public class BallLogicTests
     {
@@ -142,28 +180,6 @@ namespace Tests
             logicBall.Y = 60;
             Assert.IsTrue(yChanged);
         }
-
-        /*[Test]
-        public void CollisionFieldTest()
-        {
-            logicBall.X = 5;
-            logicBall.Y = 5;
-            logicBall.SetSpeed(-2, -3);
-            api.CheckCollision(logicBall.ball, new PropertyChangedEventArgs(nameof(logicBall.ball.X)));
-            api.CheckCollision(logicBall.ball, new PropertyChangedEventArgs(nameof(logicBall.ball.Y)));
-
-            Assert.AreEqual(2, logicBall.ball.XSpeed);
-            Assert.AreEqual(3, logicBall.ball.YSpeed);
-
-            logicBall.X = 775;
-            logicBall.Y = 375;
-            logicBall.SetSpeed(2, 3);
-            api.CheckCollision(logicBall.ball, new PropertyChangedEventArgs(nameof(logicBall.ball.X)));
-            api.CheckCollision(logicBall.ball, new PropertyChangedEventArgs(nameof(logicBall.ball.Y)));
-
-            Assert.AreEqual(-2, logicBall.ball.XSpeed);
-            Assert.AreEqual(-3, logicBall.ball.YSpeed);
-        }*/
     }
 }
 
