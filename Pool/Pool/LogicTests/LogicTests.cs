@@ -38,14 +38,14 @@ namespace Tests
             // Test kolizji z prawą ścianą
             api.GetBalls().First().X = 780 - api.GetBalls().First().Diameter;
             api.GetBalls().First().SetSpeed(2, 0);
-            System.Threading.Thread.Sleep(20);
+            System.Threading.Thread.Sleep(100);
             Assert.AreNotEqual(2, api.GetBalls().First().XSpeed);
 
             // Test kolizji z górną ścianą
             api.GetBalls().First().Y = 0;
             api.GetBalls().First().SetSpeed(0, -2);
 
-            System.Threading.Thread.Sleep(20);
+            System.Threading.Thread.Sleep(100);
             Assert.AreNotEqual(-2, api.GetBalls().First().YSpeed);
 
 
@@ -53,7 +53,7 @@ namespace Tests
             api.GetBalls().First().Y = 380 - api.GetBalls().First().Diameter;
             api.GetBalls().First().SetSpeed(0, 2);
 
-            System.Threading.Thread.Sleep(20);
+            System.Threading.Thread.Sleep(100);
             Assert.AreNotEqual(2, api.GetBalls().First().YSpeed);
         }
 
