@@ -77,6 +77,11 @@ namespace Logic
         {
             get { return ball.Diameter; }
         }
+
+        public void SetSpeed(double xSpeed, double ySpeed)
+        {
+            ball.SetSpeed(xSpeed, ySpeed);
+        }
     }
 }
 
