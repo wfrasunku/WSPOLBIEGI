@@ -63,12 +63,12 @@ namespace Logic
                 if ((ball.X + ball.Diameter) >= this.dataApi.PoolTable.Width)
                 {
                     ball.SetSpeed(-Math.Abs(ball.XSpeed), ball.YSpeed);
-                    ball.X = 780 - ball.Diameter - 1;
+                    ball.X = this.dataApi.PoolTable.Width - ball.Diameter + ball.XSpeed;
                 }
                 if ((ball.Y + ball.Diameter) >= this.dataApi.PoolTable.Height)
                 {
                     ball.SetSpeed(ball.XSpeed, -Math.Abs(ball.YSpeed));
-                    ball.Y = 380 - ball.Diameter - 1;
+                    ball.Y = this.dataApi.PoolTable.Height - ball.Diameter + ball.YSpeed;
                 }
             }
 
