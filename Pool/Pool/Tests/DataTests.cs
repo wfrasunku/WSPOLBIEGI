@@ -18,6 +18,7 @@ namespace Tests
             Assert.AreEqual(30, ball.X);
             Assert.AreEqual(40, ball.Y);
             Assert.AreEqual(20, ball.Diameter);
+            Assert.AreEqual(20, ball.Mass);
             Assert.AreEqual("Blue", ball.Color);
         }
 
@@ -37,6 +38,8 @@ namespace Tests
             Assert.AreEqual(50, ball.X);
             Assert.AreEqual(60, ball.Y);
             Assert.AreEqual(20, ball.Diameter);
+            Assert.AreEqual(20, ball.Mass);
+            Assert.AreEqual("Blue", ball.Color);
 
         }
 
