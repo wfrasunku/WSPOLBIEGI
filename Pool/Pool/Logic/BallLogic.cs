@@ -6,6 +6,7 @@ namespace Logic
     public class BallLogic : INotifyPropertyChanged
     {
         private BallData ball;
+
         public BallLogic(BallData ball)
         {
             this.ball = ball;
@@ -76,6 +77,16 @@ namespace Logic
         public double Diameter
         {
             get { return ball.Diameter; }
+        }
+
+        public double XSpeed
+        { 
+            get { return ball.XSpeed; } 
+        }
+
+        public double YSpeed
+        { 
+            get { return ball.YSpeed; } 
         }
 
         public void SetSpeed(double xSpeed, double ySpeed)
