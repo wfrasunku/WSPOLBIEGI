@@ -65,11 +65,11 @@ namespace Tests
             api.GetBalls().First().X = api.GetBalls().Last().X = 100;
             api.GetBalls().First().Y = api.GetBalls().Last().Y = 100;
             api.GetBalls().First().SetSpeed(2, 0);
-            api.GetBalls().First().SetSpeed(-2, 0);
+            api.GetBalls().Last().SetSpeed(-2, 0);
             System.Threading.Thread.Sleep(100);
 
-            Assert.AreNotEqual(-2, api.GetBalls().First().XSpeed);
-            Assert.AreNotEqual(2, api.GetBalls().Last().XSpeed);
+            Assert.AreNotEqual(2, api.GetBalls().First().XSpeed);
+            Assert.AreNotEqual(-2, api.GetBalls().Last().XSpeed);
 
         }
     }
