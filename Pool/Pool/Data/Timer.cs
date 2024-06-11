@@ -20,15 +20,14 @@ namespace Data
 
         private void SetTimer()
         {
-            moveTimer = new System.Timers.Timer(1000); // Ustawienie interwału na 1000 ms (1 sekundę)
-            moveTimer.Elapsed += (sender, e) => WriteLogs(); // Ustawienie zdarzenia Elapsed, które wywoła metodę WriteLogs co określony czas
+            moveTimer = new System.Timers.Timer(1000);
+            moveTimer.Elapsed += (sender, e) => WriteLogs();
             moveTimer.AutoReset = true;
             moveTimer.Enabled = true;
         }
 
         private void WriteLogs()
         {
-            // Zapis danych do pliku JSON
             logWriter.WriteLogsToJSON(balls);
         }
 

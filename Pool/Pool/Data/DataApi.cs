@@ -16,7 +16,7 @@ namespace Data
             private MoveTimer moveTimer;
             private bool updating;
             private readonly object positionLock = new();
-            private List<BallData> balls = new List<BallData>(); // Utworzenie nowej listy kul
+            private List<BallData> balls = new List<BallData>();
 
             public override PoolTable PoolTable => table;
 
@@ -31,9 +31,8 @@ namespace Data
 
                 CreateBalls(numberOfBalls, height, width);
                 updating = true;
-                balls = GetBalls(); // Pobranie kul z metody GetBalls
+                balls = GetBalls();
 
-                // Tworzymy instancję LogWriter i przekazujemy ją do MoveTimer
                 LogWriter logWriter = new LogWriter();
                 moveTimer = new MoveTimer(balls, logWriter);
 
@@ -107,14 +106,14 @@ namespace Data
 
             public void CreateBalls(int numberOfBalls, int height, int width)
             {
-                balls.Clear(); // Wyczyszczenie listy przed dodaniem nowych kulek
+                balls.Clear();
                 for (int i = 0; i < numberOfBalls; i++)
                 {
                     balls.Add(CreateBall(height, width));
                 }
             }
 
-            public override List<BallData> GetBalls() => new List<BallData>(balls); // Zwrócenie nowej listy kulek
+            public override List<BallData> GetBalls() => new List<BallData>(balls);
         }
     }
 }

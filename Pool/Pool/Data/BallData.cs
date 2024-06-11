@@ -4,6 +4,9 @@ namespace Data
 {
     public class BallData : INotifyPropertyChanged
     {
+        private static int nextId = 1;
+
+        private readonly int id;
         private double mass;
         private string color;
         private double x;
@@ -14,12 +17,15 @@ namespace Data
 
         public BallData(double x, double y, int diameter, double mass, string color)
         {
+            this.id = nextId++;
             this.mass = mass;
             this.x = x;
             this.y = y;
-            this.diameter = diameter;    
+            this.diameter = diameter;
             this.color = color;
         }
+
+        public int Id => id;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
