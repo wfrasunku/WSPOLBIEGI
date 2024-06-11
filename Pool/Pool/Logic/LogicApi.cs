@@ -101,6 +101,7 @@ namespace Logic
                             ball.SetSpeed(ball.XSpeed - p * nextBall.Mass * nx, ball.YSpeed - p * nextBall.Mass * ny);
                             nextBall.SetSpeed(nextBall.XSpeed + p * ball.Mass * nx, nextBall.YSpeed + p * ball.Mass * ny);
                         }
+                        Console.WriteLine("Doszlo do kolizji !");
                     }
                 }
             }

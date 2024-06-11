@@ -28,32 +28,37 @@ namespace Tests
             //var ball = api.GetBalls().First();
 
             // Test kolizji z lewą ścianą
+            api.GetBalls().First().Y = 100;
             api.GetBalls().First().X = 0;
             api.GetBalls().First().SetSpeed(-2, 0);
 
-            System.Threading.Thread.Sleep(20);
+            System.Threading.Thread.Sleep(50);
             Assert.AreNotEqual(-2, api.GetBalls().First().XSpeed);
 
 
             // Test kolizji z prawą ścianą
-            api.GetBalls().First().X = 780 - api.GetBalls().First().Diameter;
+            api.GetBalls().First().Y = 100;
+            api.GetBalls().First().X = 780 - api.GetBalls().First().Diameter/2;
             api.GetBalls().First().SetSpeed(2, 0);
-            System.Threading.Thread.Sleep(100);
+
+            System.Threading.Thread.Sleep(50);
             Assert.AreNotEqual(2, api.GetBalls().First().XSpeed);
 
             // Test kolizji z górną ścianą
+            api.GetBalls().First().X = 100;
             api.GetBalls().First().Y = 0;
             api.GetBalls().First().SetSpeed(0, -2);
 
-            System.Threading.Thread.Sleep(100);
+            System.Threading.Thread.Sleep(50);
             Assert.AreNotEqual(-2, api.GetBalls().First().YSpeed);
 
 
             // Test kolizji z dolną ścianą
-            api.GetBalls().First().Y = 380 - api.GetBalls().First().Diameter;
+            api.GetBalls().First().X = 100;
+            api.GetBalls().First().Y = 380 - api.GetBalls().First().Diameter/2;
             api.GetBalls().First().SetSpeed(0, 2);
 
-            System.Threading.Thread.Sleep(100);
+            System.Threading.Thread.Sleep(50);
             Assert.AreNotEqual(2, api.GetBalls().First().YSpeed);
         }
 
@@ -62,11 +67,31 @@ namespace Tests
         {
             api.StartUpdating(2);
 
-            api.GetBalls().First().X = api.GetBalls().Last().X = 100;
-            api.GetBalls().First().Y = api.GetBalls().Last().Y = 100;
+            Console.WriteLine("Pozycja kulki 1: (" + api.GetBalls().First().X + ", " + api.GetBalls().First().Y + ")");
+            Console.WriteLine("Prędkość kulki 1: (" + api.GetBalls().First().XSpeed + ", " + api.GetBalls().First().YSpeed + ")");
+            Console.WriteLine("Pozycja kulki 2: (" + api.GetBalls().Last().X + ", " + api.GetBalls().Last().Y + ")");
+            Console.WriteLine("Prędkość kulki 2: (" + api.GetBalls().Last().XSpeed + ", " + api.GetBalls().Last().YSpeed + ")");
+
+            Console.WriteLine("po ustawieniu wartosci");
+
             api.GetBalls().First().SetSpeed(2, 0);
             api.GetBalls().Last().SetSpeed(-2, 0);
-            System.Threading.Thread.Sleep(100);
+            api.GetBalls().First().X = 100;
+            api.GetBalls().Last().X = 120;
+            api.GetBalls().First().Y = api.GetBalls().Last().Y = 100;
+
+            Console.WriteLine("Pozycja kulki 1: (" + api.GetBalls().First().X + ", " + api.GetBalls().First().Y + ")");
+            Console.WriteLine("Prędkość kulki 1: (" + api.GetBalls().First().XSpeed + ", " + api.GetBalls().First().YSpeed + ")");
+            Console.WriteLine("Pozycja kulki 2: (" + api.GetBalls().Last().X + ", " + api.GetBalls().Last().Y + ")");
+            Console.WriteLine("Prędkość kulki 2: (" + api.GetBalls().Last().XSpeed + ", " + api.GetBalls().Last().YSpeed + ")");
+
+            System.Threading.Thread.Sleep(50);
+            Console.WriteLine("po Sleep");
+
+            Console.WriteLine("Pozycja kulki 1: (" + api.GetBalls().First().X + ", " + api.GetBalls().First().Y + ")");
+            Console.WriteLine("Prędkość kulki 1: (" + api.GetBalls().First().XSpeed + ", " + api.GetBalls().First().YSpeed + ")");
+            Console.WriteLine("Pozycja kulki 2: (" + api.GetBalls().Last().X + ", " + api.GetBalls().Last().Y + ")");
+            Console.WriteLine("Prędkość kulki 2: (" + api.GetBalls().Last().XSpeed + ", " + api.GetBalls().Last().YSpeed + ")");
 
             Assert.AreNotEqual(2, api.GetBalls().First().XSpeed);
             Assert.AreNotEqual(-2, api.GetBalls().Last().XSpeed);
