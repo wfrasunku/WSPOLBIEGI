@@ -63,9 +63,17 @@ namespace Tests
         {
             api.StartUpdating(2);
 
+            Console.WriteLine("Pozycja kulki 1: (" + api.GetBalls().First().X + ", " + api.GetBalls().First().Y + ")");
+            Console.WriteLine("Prędkość kulki 1: (" + api.GetBalls().First().XSpeed + ", " + api.GetBalls().First().YSpeed + ")");
+            Console.WriteLine("Pozycja kulki 2: (" + api.GetBalls().Last().X + ", " + api.GetBalls().Last().Y + ")");
+            Console.WriteLine("Prędkość kulki 2: (" + api.GetBalls().Last().XSpeed + ", " + api.GetBalls().Last().YSpeed + ")");
+
+            Console.WriteLine("po ustawieniu wartosci");
+
             api.GetBalls().First().SetSpeed(2, 0);
             api.GetBalls().Last().SetSpeed(-2, 0);
-            api.GetBalls().First().X = api.GetBalls().Last().X = 100;
+            api.GetBalls().First().X = 100;
+            api.GetBalls().Last().X = 120;
             api.GetBalls().First().Y = api.GetBalls().Last().Y = 100;
 
             Console.WriteLine("Pozycja kulki 1: (" + api.GetBalls().First().X + ", " + api.GetBalls().First().Y + ")");
@@ -74,7 +82,7 @@ namespace Tests
             Console.WriteLine("Prędkość kulki 2: (" + api.GetBalls().Last().XSpeed + ", " + api.GetBalls().Last().YSpeed + ")");
 
             System.Threading.Thread.Sleep(50);
-            Console.WriteLine("Sleep");
+            Console.WriteLine("po Sleep");
 
             Console.WriteLine("Pozycja kulki 1: (" + api.GetBalls().First().X + ", " + api.GetBalls().First().Y + ")");
             Console.WriteLine("Prędkość kulki 1: (" + api.GetBalls().First().XSpeed + ", " + api.GetBalls().First().YSpeed + ")");
