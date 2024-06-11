@@ -107,6 +107,7 @@ namespace Data
             public void CreateBalls(int numberOfBalls, int height, int width)
             {
                 balls.Clear();
+                BallData.ResetIdCounter();
                 if (File.Exists("logs.json"))
                 {
                     File.Delete("logs.json");

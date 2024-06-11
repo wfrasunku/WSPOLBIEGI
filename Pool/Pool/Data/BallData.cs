@@ -27,6 +27,11 @@ namespace Data
 
         public int Id => id;
 
+        public static void ResetIdCounter()
+        {
+            nextId = 1;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public virtual void OnPropertyChanged(string name)
@@ -77,7 +82,6 @@ namespace Data
                 }
             }
         }
-
 
         public double XSpeed
         {
