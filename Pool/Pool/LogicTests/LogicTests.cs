@@ -36,7 +36,7 @@ namespace Tests
 
 
             // Test kolizji z prawą ścianą
-            api.GetBalls().First().X = 780 - api.GetBalls().First().Diameter;
+            api.GetBalls().First().X = 780 - api.GetBalls().First().Diameter/2;
             api.GetBalls().First().SetSpeed(2, 0);
 
             System.Threading.Thread.Sleep(50);
@@ -51,7 +51,7 @@ namespace Tests
 
 
             // Test kolizji z dolną ścianą
-            api.GetBalls().First().Y = 380 - api.GetBalls().First().Diameter;
+            api.GetBalls().First().Y = 380 - api.GetBalls().First().Diameter/2;
             api.GetBalls().First().SetSpeed(0, 2);
 
             System.Threading.Thread.Sleep(50);
