@@ -1,10 +1,12 @@
-﻿namespace Data
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace Data
 {
     public abstract class AbstractDataApi
     {
         public abstract void CreatePool(int numberOfBalls, int height, int width);
         public abstract List<BallData> GetBalls();
-        private readonly List<BallData> balls = new();
         public static AbstractDataApi API() => new DataApi();
         public abstract PoolTable PoolTable { get; }
 
@@ -14,15 +16,13 @@
             private MoveTimer moveTimer;
             private bool updating;
             private readonly object positionLock = new();
+            private List<BallData> balls = new List<BallData>(); // Utworzenie nowej listy kul
 
-            public override PoolTable PoolTable
-            {
-                get { return table; }
-            }
+            public override PoolTable PoolTable => table;
 
             public override void CreatePool(int numberOfBalls, int height, int width)
             {
-                this.table = new PoolTable(height, width);
+                table = new PoolTable(height, width);
 
                 if (updating)
                 {
@@ -31,9 +31,12 @@
 
                 CreateBalls(numberOfBalls, height, width);
                 updating = true;
-                List<BallData> balls = GetBalls();
-                moveTimer = new MoveTimer(balls);
-  
+                balls = GetBalls(); // Pobranie kul z metody GetBalls
+
+                // Tworzymy instancję LogWriter i przekazujemy ją do MoveTimer
+                LogWriter logWriter = new LogWriter();
+                moveTimer = new MoveTimer(balls, logWriter);
+
                 foreach (BallData ball in balls)
                 {
                     Task task = new Task(async () =>
@@ -61,12 +64,12 @@
                 double xSpeed = 0;
                 double ySpeed = 0;
 
-                while(xSpeed == 0)
+                while (xSpeed == 0)
                 {
                     xSpeed = r.Next(-5, 6);
                 }
 
-                while(ySpeed == 0)
+                while (ySpeed == 0)
                 {
                     ySpeed = r.Next(-5, 6);
                 }
@@ -104,13 +107,14 @@
 
             public void CreateBalls(int numberOfBalls, int height, int width)
             {
-                this.balls.Clear();
+                balls.Clear(); // Wyczyszczenie listy przed dodaniem nowych kulek
                 for (int i = 0; i < numberOfBalls; i++)
                 {
-                    this.balls.Add(CreateBall(height, width));
+                    balls.Add(CreateBall(height, width));
                 }
             }
-            public override List<BallData> GetBalls() => new List<BallData>(balls);
+
+            public override List<BallData> GetBalls() => new List<BallData>(balls); // Zwrócenie nowej listy kulek
         }
     }
 }
