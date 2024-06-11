@@ -107,10 +107,17 @@ namespace Data
             public void CreateBalls(int numberOfBalls, int height, int width)
             {
                 balls.Clear();
+                if (File.Exists("logs.json"))
+                {
+                    File.Delete("logs.json");
+                }
+
                 for (int i = 0; i < numberOfBalls; i++)
                 {
                     balls.Add(CreateBall(height, width));
                 }
+                LogWriter logWriter = new LogWriter();
+                logWriter.WriteLogsToJSON(balls);
             }
 
             public override List<BallData> GetBalls() => new List<BallData>(balls);
