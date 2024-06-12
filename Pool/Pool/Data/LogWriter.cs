@@ -7,7 +7,12 @@ namespace Data
 {
     public class LogWriter
     {
-        private readonly string logFilePath = "logs.json";
+        private readonly string logFilePath;
+
+        public LogWriter()
+        {
+            logFilePath = $"logs-{DateTime.Now:yyyy-MM-dd-HH-mm-ss}.json";
+        }
 
         public void WriteLogsToJSON(List<BallData> balls)
         {
